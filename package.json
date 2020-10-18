@@ -1,0 +1,19 @@
+{
+  "name": "wiloke-instafeedhub-cgb-guten-block",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "cgb-scripts start",
+    "build": "cgb-scripts build",
+    "eject": "cgb-scripts eject"
+  },
+  "dependencies": {
+    "axios": "^0.20.0",
+    "cgb-scripts": "1.23.1",
+    "react-autocomplete": "^1.8.1",
+    "react-contenteditable": "^3.3.5"
+  },
+  "devDependencies": {
+    "styled-components": "^5.2.0"
+  }
+}
