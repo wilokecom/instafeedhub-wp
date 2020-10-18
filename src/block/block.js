@@ -71,11 +71,23 @@ registerBlockType('cgb/block-wiloke-instafeedhub', {
 					success: function (response) {
 						if (response.status === 'success') {
 							options = [...response.items];
-							console.log(options)
 						}
 					}
 				})
 			}
+		}
+
+		function downloadInstaConfigured(id) {
+			jQuery.ajax({
+				type: 'GET',
+				url: `https://instafeedhub.com/wp-json/wiloke/v1/instagram/me/${id}/global-configuration`,
+				dataType: 'json',
+				success: function (response) {
+					if (response.status === 'success') {
+						options = [...response.items];
+					}
+				}
+			})
 		}
 
 		return (
