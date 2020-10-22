@@ -16,9 +16,14 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
+define( 'WILOKE_IFH_NAMESPACE', 'wiloke/v1/instafeedhub' );
+define( 'WILOKE_IFH_VERSION', 0.1 );
+define( 'WILOKE_IFH_PREFIX', 'wiloke_instafeedhub_' );
 require_once plugin_dir_path( __FILE__) . 'vendor/autoload.php';
 /**
  * Block Initializer.
  */
 require_once plugin_dir_path( __FILE__ ) . 'src/init.php';
+
+new \WilokeInstaFeedHub\Controllers\RemoteDataController();
+
