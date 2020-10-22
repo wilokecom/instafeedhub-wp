@@ -1,60 +1,76 @@
+import * as _ from "lodash";
+import { RichText } from "@wordpress/editor";
+const { useState, useEffect } = wp.element;
 
-/**
- * A very simple autocomplete component
- *
- * This is to replace the OOTB Gutenberg Autocomplete component because it is
- * currently broken as of v4.5.1.
- *
- * See Github issue: https://github.com/WordPress/gutenberg/issues/10542
- *
- * Note: The options array should be an array of objects containing labels and values; i.e.:
- *   [
- *     { value: 'first', label: 'First' },
- *     { value: 'second', label: 'Second' }
- *   ]
- */
+const MyAutocomplete = ({
+  id = "id",
+  label,
+  value,
+  options,
+  onChange,
+  onSelectItem,
+}) => {
+  const [inputValue, setInputValue] = useState(value);
+  const [itemSelected, setItemSlected] = useState({});
+  const [showList, setShowList] = useState(false);
+  const inputId = Math.random() + id + Date.now();
 
-// Load external dependency.
-import { isEmpty } from 'lodash';
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
 
-function MyAutocomplete( {
-							 label,
-							 id,
-							 value,
-							 onChange,
-							 options = [],
-						 } ) {
-	// Construct a unique ID for this block.
-	const blockId = `my-autocomplete-${ id }`;
+  const handleSelectUser = (item) => () => {
+    onSelectItem(item);
+    setItemSlected(item);
+    setShowList(false);
+  };
 
-	// Function to handle the onChange event.
-	const onChangeValue = ( event ) => {
-		onChange( event.target.value );
-	};
+  const handleChange = (event) => {
+    onChange(event.target.value);
+    setInputValue(event.target.value);
+    setShowList(true);
+  };
 
-	// Return the block, but only if options were passed in.
-	return ! isEmpty( options ) && (
-		<div>
-			{ /* Label for the block. */ }
-			<label for={ blockId }>
-				{ label }
-			</label>
-
-			{ /* Input field. */ }
-			<input
-				list={ blockId }
-				value={ value }
-				onChange={ onChangeValue }
-			/>
-
-			{ /* List of all of the autocomplete options. */ }
-			<datalist id={ blockId }>
-				{ options.map( ( option, index ) =>
-					<option value={ option.id } label={ option.name } />
-				) }
-			</datalist>
-		</div>
-	);
+  return (
+    <div className="MyAutocomplete">
+      <p className="MyAutocomplete__label">
+        Choose your browser from the list:
+      </p>
+      <div className="MyAutocomplete__content">
+        <input
+          id={inputId}
+          value={inputValue}
+          onChange={handleChange}
+          onFocus={() => setShowList(true)}
+        />
+        {showList && (
+          <ul>
+            {!options || _.isEmpty(options) ? (
+              <li>Not foud user! Try agan.</li>
+            ) : (
+              options.map((item) => {
+                const active = item.id === itemSelected.id;
+                const CLASS = active ? "active" : "";
+                return (
+                  <li
+                    className={`MyAutocomplete__content__li ${CLASS}`}
+                    onClick={handleSelectUser(item)}
+                  >
+                    {item.name}
+                  </li>
+                );
+              })
+            )}
+            <span
+              onClick={() => setShowList(false)}
+              className="MyAutocomplete__content__closeBtn"
+            >
+              close
+            </span>
+          </ul>
+        )}
+      </div>
+    </div>
+  );
 };
-
 export default MyAutocomplete;
