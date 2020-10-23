@@ -59,16 +59,11 @@ class RemoteDataController
 		if (empty($aData)) {
 			Option::update($this->optionKey, [$aParams]);
 		} else {
-			$result = false;
-			foreach ($aData as $key => $item) {
-				if ($item['id'] == $postID) {
-					$aData[$key] = $aParams;
-					Option::update($this->optionKey, $aData);
-					$result = true;
-					break;
-				}
-			}
-			if ($result == false) {
+			$key = array_search($postID, array_column($aData, 'id'));
+			if ($key !== false) {
+				$aData[$key] = $aParams;
+				Option::update($this->optionKey, $aData);
+			} else {
 				$aData[] = $aParams;
 				Option::update($this->optionKey, $aData);
 			}
@@ -93,20 +88,14 @@ class RemoteDataController
 		if (empty($aData)) {
 			return Message::error(__('This post has been deleted or it does not exist', 'wiloke-instafeedhub'), 400);
 		} else {
-			$result = false;
-			foreach ($aData as $key => $item) {
-				if ($item['id'] == $postID) {
-					unset($aData[$key]);
-					$aData = array_values($aData);
-					Option::update($this->optionKey, $aData);
-					$result = true;
-					break;
-				}
+			$key = array_search($postID, array_column($aData, 'id'));
+			if ($key !== false) {
+				unset($aData[$key]);
+				$aData = array_values($aData);
+				Option::update($this->optionKey, $aData);
+			} else {
+				return Message::error(__('This post has been deleted or it does not exist', 'wiloke-instafeedhub'), 400);
 			}
-		}
-
-		if ($result == false) {
-			return Message::error(__('This post has been deleted or it does not exist', 'wiloke-instafeedhub'), 400);
 		}
 
 		return Message::success('This post has been deleted successfully');
