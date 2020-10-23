@@ -2,8 +2,8 @@
 
 namespace WilokeInstaFeedHub\Controllers;
 
-use WilokeInstaFeedHub\Helpers\Message;
 use WilokeInstaFeedHub\Helpers\Option;
+use WilokeInstaFeedHub\Helpers\Message;
 
 /**
  * Class RemoteDataController
@@ -12,25 +12,34 @@ use WilokeInstaFeedHub\Helpers\Option;
 class RemoteDataController
 {
 	/**
+	 * @var string
+	 */
+	private $optionKey = 'wil_insta_shopify';
+
+	/**
 	 * RemoteDataController constructor.
 	 */
 	public function __construct()
 	{
 		add_action('rest_api_init', [$this, 'registerRouter']);
+		add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
+		add_action('admin_enqueue_scripts', [$this, 'enqueueScripts']);
 	}
 
 	public function registerRouter()
 	{
 		register_rest_route(WILOKE_IFH_NAMESPACE, '/remote-data',
 			[
-				'methods'             => 'POST',
-				'callback'            => [$this, 'sendData'],
-				'permission_callback' => '__return_true'
-			],
-			[
-				'methods'             => 'DELETE',
-				'callback'            => [$this, 'deleteData'],
-				'permission_callback' => '__return_true'
+				[
+					'methods'             => 'POST',
+					'callback'            => [$this, 'updateData'],
+					'permission_callback' => '__return_true'
+				],
+				[
+					'methods'             => 'DELETE',
+					'callback'            => [$this, 'deleteData'],
+					'permission_callback' => '__return_true'
+				]
 			]
 		);
 	}
@@ -39,19 +48,30 @@ class RemoteDataController
 	 * @param \WP_REST_Request $oRequest
 	 * @return array|\WP_REST_Response
 	 */
-	public function postData(\WP_REST_Request $oRequest)
+	public function updateData(\WP_REST_Request $oRequest)
 	{
 		$aParams = $oRequest->get_params();
 		if (empty($aParams)) {
 			return Message::error(__('There is no data', 'wiloke-instafeedhub'), 400);
 		}
-
-		$aData = Option::get('__wilInstagramShopify__');
-		if (empty($aParams)) {
-			Option::update('__wilInstagramShopify__', $aParams);
+		$postID = $aParams['id'];
+		$aData = Option::get($this->optionKey);
+		if (empty($aData)) {
+			Option::update($this->optionKey, [$aParams]);
 		} else {
-			$aData[] = $aParams;
-			update_option('__wilInstagramShopify__', $aData);
+			$result = false;
+			foreach ($aData as $key => $item) {
+				if ($item['id'] == $postID) {
+					$aData[$key] = $aParams;
+					Option::update($this->optionKey, $aData);
+					$result = true;
+					break;
+				}
+			}
+			if ($result == false) {
+				$aData[] = $aParams;
+				Option::update($this->optionKey, $aData);
+			}
 		}
 
 		return Message::success(__('This post has been update successfully'));
@@ -63,23 +83,25 @@ class RemoteDataController
 	 */
 	public function deleteData(\WP_REST_Request $oRequest)
 	{
-		$aParams = $oRequest->get_params();
-		if (empty($aParams)) {
-			return Message::error(__('There is no data', 'wiloke-instafeedhub'), 400);
-		}
+		$postID = $oRequest->get_param('id');
 
-		$postID = $aParams['postID'];
-		$aData = get_option('__wilInstagramShopify__');
+		if (empty($postID)) {
+			return Message::error(__('The post id is required', 'wiloke-instafeedhub'), 400);
+		}
+		$aData = Option::get($this->optionKey);
+
 		if (empty($aData)) {
 			return Message::error(__('This post has been deleted or it does not exist', 'wiloke-instafeedhub'), 400);
-		}
-		$result = false;
-		foreach ($aData as $key => $item) {
-			if ($item['postID'] == $postID) {
-				unset($aData[$key]);
-				update_option('__wilInstagramShopify__', $aData);
-				$result = true;
-				break;
+		} else {
+			$result = false;
+			foreach ($aData as $key => $item) {
+				if ($item['id'] == $postID) {
+					unset($aData[$key]);
+					$aData = array_values($aData);
+					Option::update($this->optionKey, $aData);
+					$result = true;
+					break;
+				}
 			}
 		}
 
@@ -88,5 +110,10 @@ class RemoteDataController
 		}
 
 		return Message::success('This post has been deleted successfully');
+	}
+
+	public function enqueueScripts()
+	{
+		wp_localize_script('jquery', '__wilInstagramShopify__', Option::get($this->optionKey));
 	}
 }
