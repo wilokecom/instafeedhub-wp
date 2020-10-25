@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: wiloke-instafeedhub — CGB Gutenberg Block Plugin
+ * Plugin Name: Wiloke InstaFeedhub
  * Plugin URI: https://github.com/ahmadawais/create-guten-block/
  * Description: wiloke-instafeedhub — is a Gutenberg plugin created via create-guten-block.
  * Author: mrahmadawais, maedahbatool
