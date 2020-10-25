@@ -54,6 +54,7 @@ class RemoteDataController
 		if (empty($aParams)) {
 			return Message::error(__('There is no data', 'wiloke-instafeedhub'), 400);
 		}
+
 		$postID = $aParams['id'];
 		$aData = Option::get($this->optionKey);
 		if (empty($aData)) {
@@ -61,9 +62,17 @@ class RemoteDataController
 		} else {
 			$key = array_search($postID, array_column($aData, 'id'));
 			if ($key !== false) {
-				$aData[$key] = $aParams;
-				Option::update($this->optionKey, $aData);
+				if ($aParams['status'] !== 'publish') {
+					unset($aData[$key]);
+					$aData = array_values( $aData );
+				} else {
+					$aData[$key] = $aParams;
+				}
+				Option::update( $this->optionKey, $aData );
 			} else {
+				if ($aParams['status'] !== 'publish') {
+					return Message::error(__('This post status is not publish', 'wiloke-instafeedhub'), 400);
+				}
 				$aData[] = $aParams;
 				Option::update($this->optionKey, $aData);
 			}
