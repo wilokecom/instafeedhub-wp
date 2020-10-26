@@ -51,7 +51,7 @@ class RemoteDataController
 	public function updateData(\WP_REST_Request $oRequest)
 	{
 		if ($this->verifyAcessToken() == false) {
-			return Message::error(__('The access token is invalid', 'wiloke-instafeedhub'), 400);
+			return Message::error(__('The access token is invalid', 'wiloke-instafeedhub-wp'), 400);
 		}
 
 		$aParams = $oRequest->get_params();
