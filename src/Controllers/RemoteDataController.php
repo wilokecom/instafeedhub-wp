@@ -50,9 +50,13 @@ class RemoteDataController
 	 */
 	public function updateData(\WP_REST_Request $oRequest)
 	{
+		if ($this->verifyAcessToken() == false) {
+			return Message::error(__('The access token is invalid', 'wiloke-instafeedhub-wp'), 400);
+		}
+
 		$aParams = $oRequest->get_params();
 		if (empty($aParams)) {
-			return Message::error(__('There is no data', 'wiloke-instafeedhub'), 400);
+			return Message::error(__('There is no data', 'wiloke-instafeedhub-wp'), 400);
 		}
 
 		$postID = $aParams['id'];
@@ -64,14 +68,14 @@ class RemoteDataController
 			if ($key !== false) {
 				if ($aParams['status'] !== 'publish') {
 					unset($aData[$key]);
-					$aData = array_values( $aData );
+					$aData = array_values($aData);
 				} else {
 					$aData[$key] = $aParams;
 				}
-				Option::update( $this->optionKey, $aData );
+				Option::update($this->optionKey, $aData);
 			} else {
 				if ($aParams['status'] !== 'publish') {
-					return Message::error(__('This post status is not publish', 'wiloke-instafeedhub'), 400);
+					return Message::error(__('This post status is not publish', 'wiloke-instafeedhub-wp'), 400);
 				}
 				$aData[] = $aParams;
 				Option::update($this->optionKey, $aData);
@@ -87,15 +91,19 @@ class RemoteDataController
 	 */
 	public function deleteData(\WP_REST_Request $oRequest)
 	{
+		if ($this->verifyAcessToken() == false) {
+			return Message::error(__('The access token is invalid', 'wiloke-instafeedhub'), 400);
+		}
+
 		$postID = $oRequest->get_param('id');
 
 		if (empty($postID)) {
-			return Message::error(__('The post id is required', 'wiloke-instafeedhub'), 400);
+			return Message::error(__('The post id is required', 'wiloke-instafeedhub-wp'), 400);
 		}
 		$aData = Option::get($this->optionKey);
 
 		if (empty($aData)) {
-			return Message::error(__('This post has been deleted or it does not exist', 'wiloke-instafeedhub'), 400);
+			return Message::error(__('This post has been deleted or it does not exist', 'wiloke-instafeedhub-wp'), 400);
 		} else {
 			$key = array_search($postID, array_column($aData, 'id'));
 			if ($key !== false) {
@@ -103,11 +111,37 @@ class RemoteDataController
 				$aData = array_values($aData);
 				Option::update($this->optionKey, $aData);
 			} else {
-				return Message::error(__('This post has been deleted or it does not exist', 'wiloke-instafeedhub'), 400);
+				return Message::error(__('This post has been deleted or it does not exist', 'wiloke-instafeedhub-wp'), 400);
 			}
 		}
 
 		return Message::success('This post has been deleted successfully');
+	}
+
+	/**
+	 * @return array|bool|string|\WP_REST_Response
+	 */
+	public function verifyAcessToken()
+	{
+		$accessToken = $_SERVER['HTTP_ACCESSTOKEN'];
+		if (empty($accessToken)) {
+			return false;
+		}
+		$endpoint = trim($_SERVER['HTTP_DOMAIN'], '/') . '/wp-json/wiloke/v1/instagram/jwt/verify-access-token';
+		$response = wp_remote_request($endpoint, [
+			'method' => 'POST',
+			'body'   => [
+				'accessToken' => $accessToken
+			]
+		]);
+
+		$responseCode = wp_remote_retrieve_response_code($response);
+
+		if ($responseCode !== 200) {
+			return false;
+		} else {
+			return wp_remote_retrieve_body($response);
+		}
 	}
 
 	public function enqueueScripts()
