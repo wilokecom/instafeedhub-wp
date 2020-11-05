@@ -1,13 +1,13 @@
 <?php
 
-namespace WilokeInstaFeedHub\Controllers;
+namespace InstafeedHub\Controllers;
 
-use WilokeInstaFeedHub\Helpers\Option;
-use WilokeInstaFeedHub\Helpers\Message;
+use InstaFeedHub\Helpers\Option;
+use InstaFeedHub\Helpers\Message;
 
 /**
  * Class RemoteDataController
- * @package WilokeInstaFeedHub\Controllers
+ * @package InstaFeedHub\Controllers
  */
 class RemoteDataController
 {
@@ -28,7 +28,7 @@ class RemoteDataController
 
 	public function registerRouter()
 	{
-		register_rest_route(WILOKE_IFH_NAMESPACE, '/remote-data',
+		register_rest_route(IFH_NAMESPACE, '/remote-data',
 			[
 				[
 					'methods'             => 'POST',
@@ -123,25 +123,7 @@ class RemoteDataController
 	 */
 	public function verifyAcessToken()
 	{
-		$accessToken = $_SERVER['HTTP_ACCESSTOKEN'];
-		if (empty($accessToken)) {
-			return false;
-		}
-		$endpoint = trim($_SERVER['HTTP_DOMAIN'], '/') . '/wp-json/wiloke/v1/instagram/jwt/verify-access-token';
-		$response = wp_remote_request($endpoint, [
-			'method' => 'POST',
-			'body'   => [
-				'accessToken' => $accessToken
-			]
-		]);
-
-		$responseCode = wp_remote_retrieve_response_code($response);
-
-		if ($responseCode !== 200) {
-			return false;
-		} else {
-			return wp_remote_retrieve_body($response);
-		}
+		return trim($_SERVER['HTTP_DOMAIN'], '/') === trim(WILOKE_INSTAFEEDHUB_URL, '/');
 	}
 
 	public function enqueueScripts()

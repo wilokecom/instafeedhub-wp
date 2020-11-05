@@ -34,15 +34,14 @@ const labelText = "NAME (Accessible Text Input)";
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType("cgb/block-wiloke-instafeedhub", {
+registerBlockType("cgb/block-instafeedhub", {
   // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-  title: __("wiloke-instafeedhub - CGB Block"), // Block title.
+  title: __("InstafeedHub"), // Block title.
   icon: "shield", // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
   category: "common", // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
   keywords: [
-    __("wiloke-instafeedhub — CGB Block"),
-    __("CGB Example"),
-    __("create-guten-block"),
+    __("instafeedhub"),
+    __("instagram"),
   ],
   attributes: {
     value: {

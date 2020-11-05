@@ -1,10 +1,10 @@
 <?php
 
-namespace WilokeInstaFeedHub\Helpers;
+namespace InstaFeedHub\Helpers;
 
 /**
  * Class Option
- * @package WilokeInstaFeedHub\Helpers
+ * @package InstaFeedHub\Helpers
  */
 class Option
 {

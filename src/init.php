@@ -27,10 +27,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @uses {wp-editor} for WP editor styles.
  * @since 1.0.0
  */
-function wiloke_instafeedhub_cgb_block_assets() { // phpcs:ignore
+function instafeedhub_cgb_block_assets() { // phpcs:ignore
 	// Register block styles for both frontend + backend.
 	wp_register_style(
-		'wiloke_instafeedhub-cgb-style-css', // Handle.
+		'instafeedhub-cgb-style-css', // Handle.
 		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
 		is_admin() ? array( 'wp-editor' ) : null, // Dependency to include the CSS after it.
 		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
@@ -38,7 +38,7 @@ function wiloke_instafeedhub_cgb_block_assets() { // phpcs:ignore
 
 	// Register block editor script for backend.
 	wp_register_script(
-		'wiloke_instafeedhub-cgb-block-js', // Handle.
+		'instafeedhub-cgb-block-js', // Handle.
 		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
 		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), // Dependencies, defined above.
 		null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
@@ -47,7 +47,7 @@ function wiloke_instafeedhub_cgb_block_assets() { // phpcs:ignore
 
 	// Register block editor styles for backend.
 	wp_register_style(
-		'wiloke_instafeedhub-cgb-block-editor-css', // Handle.
+		'instafeedhub-cgb-block-editor-css', // Handle.
 		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
 		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
 		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
@@ -55,7 +55,7 @@ function wiloke_instafeedhub_cgb_block_assets() { // phpcs:ignore
 
 	// WP Localized globals. Use dynamic PHP stuff in JavaScript via `cgbGlobal` object.
 	wp_localize_script(
-		'wiloke_instafeedhub-cgb-block-js',
+		'instafeedhub-cgb-block-js',
 		'cgbGlobal', // Array containing dynamic data for a JS Global.
 		[
 			'pluginDirPath' => plugin_dir_path( __DIR__ ),
@@ -75,16 +75,16 @@ function wiloke_instafeedhub_cgb_block_assets() { // phpcs:ignore
 	 * @since 1.16.0
 	 */
 	register_block_type(
-		'cgb/block-wiloke-instafeedhub', array(
+		'cgb/block-instafeedhub', array(
 			// Enqueue blocks.style.build.css on both frontend & backend.
-			'style'         => 'wiloke_instafeedhub-cgb-style-css',
+			'style'         => 'instafeedhub-cgb-style-css',
 			// Enqueue blocks.build.js in the editor only.
-			'editor_script' => 'wiloke_instafeedhub-cgb-block-js',
+			'editor_script' => 'instafeedhub-cgb-block-js',
 			// Enqueue blocks.editor.build.css in the editor only.
-			'editor_style'  => 'wiloke_instafeedhub-cgb-block-editor-css',
+			'editor_style'  => 'instafeedhub-cgb-block-editor-css',
 		)
 	);
 }
 
 // Hook: Block assets.
-add_action( 'init', 'wiloke_instafeedhub_cgb_block_assets' );
+add_action( 'init', 'instafeedhub_cgb_block_assets' );

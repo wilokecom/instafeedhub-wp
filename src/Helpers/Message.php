@@ -1,10 +1,10 @@
 <?php
 
-namespace WilokeInstaFeedHub\Helpers;
+namespace InstaFeedHub\Helpers;
 
 /**
  * Class Message
- * @package WilokeInstaFeedHub\Helpers
+ * @package InstaFeedHub\Helpers
  */
 class Message
 {
