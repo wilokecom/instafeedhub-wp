@@ -2,8 +2,8 @@
 /**
  * Plugin Name: Wiloke InstaFeedhub
  * Plugin URI: https://github.com/ahmadawais/create-guten-block/
- * Description: wiloke-instafeedhub — is a Gutenberg plugin created via create-guten-block.
- * Author: mrahmadawais, maedahbatool
+ * Description: The easiest way to integrate Instagram to your website
+ * Author: instafeedhub
  * Author URI: https://AhmadAwais.com/
  * Version: 1.0.0
  * License: GPL2+
