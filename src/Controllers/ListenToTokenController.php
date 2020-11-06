@@ -33,7 +33,7 @@ class ListenToTokenController {
 			$aData['id'] = abs( $_GET['post'] );
 		}
 
-		wp_localize_script( 'jquery', 'INTAFEED_ACCESSTOKEN', $aData );
+		wp_localize_script( 'jquery', 'InstafeedHubTokens', $aData );
 	}
 
 	public function saveInstafeedHubToken() {

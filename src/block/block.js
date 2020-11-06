@@ -12,9 +12,7 @@ import ContentEditable from "react-contenteditable";
 import styled from "styled-components";
 import { TextControl, Autocomplete, PanelBody } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/editor";
-import axios from "axios";
-import * as _ from "lodash";
-import MyAutocomplete from "../simple-autocomplete";
+import Edit from "./edit";
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -72,82 +70,7 @@ registerBlockType("cgb/block-instafeedhub", {
    * @param {Object} props Props.
    * @returns {Mixed} JSX Component.
    */
-  edit: function ({ setAttributes, isSelected, attributes }) {
-    //   === CONFIG AXIOS CANCEL ===	//
-    const CancelToken = axios.CancelToken;
-    let cancel;
-
-    let timeOutRequest;
-
-    // === ATTRBUTES === //
-    const { options = [], value = "" } = attributes;
-
-    // === USESTATE === //
-
-    const actionAxiosFindUser = (query) => {
-      const url = `https://instafeedhub.com/wp-json/wiloke/v1/instagram/me/find-insta-user?q=${query}`;
-      if (cancel) {
-        cancel();
-      }
-      axios
-        .get(url, {
-          responseType: "json",
-          cancelToken: new CancelToken((c) => {
-            cancel = c;
-          }),
-        })
-        .then(({ data }) => {
-          setAttributes({
-            options: data.items || [],
-            // options: _.unionWith(data.items, options, _.isEqual),
-          });
-        })
-        .catch((thrown) => {
-          if (axios.isCancel(thrown)) {
-            console.log("Request canceled", thrown.message);
-          } else {
-            console.log("ERROR", { thrown });
-          }
-        });
-    };
-
-    function findInstaUserId(val) {
-      timeOutRequest && clearTimeout(timeOutRequest);
-      if (!!val) {
-        timeOutRequest = setTimeout(() => {
-          actionAxiosFindUser(val);
-        }, 300);
-      }
-    }
-
-    function downloadInstaConfigured({ id }) {
-      const url = `https://instafeedhub.com/wp-json/wiloke/v1/instagram/me/${id}/global-configuration`;
-      axios
-        .get(url, {
-          responseType: "json",
-        })
-        .then(console.log)
-        .catch(console.error);
-    }
-
-    console.log(44, { attributes });
-
-    return (
-      <div>
-        <MyAutocomplete
-          label="Search your instagram"
-          onChange={findInstaUserId}
-          onSelectItem={(item) => {
-            setAttributes({ value: item.name });
-            downloadInstaConfigured(item);
-          }}
-          options={options}
-          id="block-id"
-          value={value}
-        />
-      </div>
-    );
-  },
+  edit: Edit,
 
   /**
    * The save function defines the way in which the different attributes should be combined
