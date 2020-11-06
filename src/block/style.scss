@@ -4,11 +4,44 @@
  * CSS for both Frontend+Backend.
  */
 
-.wp-block-cgb-block-instafeedhub  {
-  background: $red;
-  border: 0.2rem solid $black;
-  color: $black;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem;
+.wp-block-cgb-block-instafeedhub {
+    background: $red;
+    border: 0.2rem solid $black;
+    color: $black;
+    margin: 0 auto;
+    max-width: 740px;
+    padding: 2rem;
+}
+
+.wilBlogError {
+    padding: 2rem;
+    border: 1px solid red;
+    color: red;
+    font-size: 18px;
+}
+
+.wilBlogLoading {
+    padding: 2rem;
+    border: 1px solid rgba($color: #000000, $alpha: .2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    svg {
+        margin-right: 5px;
+        animation-name: rotate;
+        animation-duration: 1.3s;
+        animation-iteration-count: infinite;
+        animation-delay: 0ms;
+        animation-timing-function: linear;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
