@@ -1,10 +1,10 @@
 <?php
 
-namespace InstaFeedHub\Helpers;
+namespace InstafeedHub\Helpers;
 
 /**
  * Class Option
- * @package InstaFeedHub\Helpers
+ * @package InstafeedHub\Helpers
  */
 class Option
 {

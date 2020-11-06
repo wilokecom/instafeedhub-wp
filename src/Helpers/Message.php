@@ -1,10 +1,10 @@
 <?php
 
-namespace InstaFeedHub\Helpers;
+namespace InstafeedHub\Helpers;
 
 /**
  * Class Message
- * @package InstaFeedHub\Helpers
+ * @package InstafeedHub\Helpers
  */
 class Message
 {

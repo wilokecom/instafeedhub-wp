@@ -2,8 +2,8 @@
 
 namespace InstafeedHub\Controllers;
 
-use InstaFeedHub\Helpers\Option;
-use InstaFeedHub\Helpers\Message;
+use InstafeedHub\Helpers\Option;
+use InstafeedHub\Helpers\Message;
 
 /**
  * Class RemoteDataController
