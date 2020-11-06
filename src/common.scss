@@ -11,7 +11,6 @@ $white: #f4f4f4;
 $gray: #dedede;
 $green: #bada55;
 $red: orangered;
-
 :root {
     --black: #000;
     --near-black: #111;
@@ -76,4 +75,4 @@ $red: orangered;
     --washed-red: #ffdfdf;
 }
 
-@import './simple-autocomplete.scss';
+@import './components/AutoComplete/AutoComplete.scss';

@@ -23,11 +23,14 @@ class ListenToTokenController {
 			$aArgs['id'] = abs( $_GET['post'] );
 		}
 
+		// $fakeEmail  = uniqid('tuan').'@gmail.com';
 		$aData = [
 			'accessToken'  => $aTokens['accessToken'],
 			'refreshToken' => $aTokens['refreshToken'],
+			// 'email'        => $fakeEmail,
 			'email'        => get_option( 'admin_email' ),
-			'nickname'     => User::getUserNickname()
+			'nickname'     	=> User::getUserNickname(),
+			'origin' => home_url('/')
 		];
 		if ( isset( $_GET['post'] ) ) {
 			$aData['id'] = abs( $_GET['post'] );

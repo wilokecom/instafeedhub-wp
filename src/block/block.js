@@ -84,7 +84,6 @@ registerBlockType("cgb/block-instafeedhub", {
    * @returns {Mixed} JSX Frontend HTML.
    */
   save: function (props) {
-    console.log(11, { props });
 
     return (
       <h1 data-value={props.attributes.value}>{props.attributes.value}</h1>

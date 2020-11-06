@@ -4,6 +4,7 @@
  * CSS for both Frontend+Backend.
  */
 
+@import './MyModal/MyModal.scss';
 .wp-block-cgb-block-instafeedhub {
     background: $red;
     border: 0.2rem solid $black;
@@ -11,6 +12,21 @@
     margin: 0 auto;
     max-width: 740px;
     padding: 2rem;
+}
+
+// ===
+.wilIntaFeedCp {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba($color: #000000, $alpha: .3);
+    border-radius: 8px;
+    font-size: 1.7rem;
+}
+
+.wilIntaFeedCpEdit__button {
+    font-size: 16px !important;
 }
 
 .wilBlogError {
@@ -22,7 +38,7 @@
 
 .wilBlogLoading {
     padding: 2rem;
-    border: 1px solid rgba($color: #000000, $alpha: .2);
+    // border: 1px solid rgba($color: #000000, $alpha: .2);
     display: flex;
     align-items: center;
     justify-content: center;

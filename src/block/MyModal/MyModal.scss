@@ -1,0 +1,17 @@
+.wilMyModal__overlay {
+    .components-modal__header {
+        height: unset;
+        border: none !important;
+        margin-bottom: 0 !important;
+    }
+    .components-modal__frame {
+        width: 100%;
+        height: 100%;
+        max-width: inherit;
+        max-height: inherit;
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
