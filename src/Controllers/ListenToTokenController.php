@@ -13,7 +13,7 @@ class ListenToTokenController {
 	}
 
 	public function adminScripts() {
-		if ( (! isset( $_GET['post_type'] ) && ! isset( $_GET['post'] )) || !current_user_can( 'edit_post') ) {
+		if ( (! isset( $_GET['post_type'] ) && ! isset( $_GET['post'] )) || !current_user_can( 'edit_posts') ) {
 			return false;
 		}
 
