@@ -14,7 +14,7 @@ async function signin(whitelistedUrl, email, nickname, args) {
     });
 
     if (response.status === 200) {
-      return;
+      return response.data;
     }else {
       return response.status  + ' - Some went error!'
     }
