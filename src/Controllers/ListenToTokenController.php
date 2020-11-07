@@ -4,12 +4,13 @@
 namespace InstafeedHub\Controllers;
 
 
+use InstafeedHub\Helpers\Session;
 use InstafeedHub\Helpers\User;
 
 class ListenToTokenController {
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', [ $this, 'adminScripts' ] );
-		add_action( 'wp_ajax_instafeedhub_save_tokens', [ $this, 'saveInstafeedHubToken' ] );
+		add_action( 'wp_ajax_instafeedhub_save_tokens', [ $this, 'saveInstafeedHubTokens' ] );
 	}
 
 	public function adminScripts() {
@@ -23,14 +24,16 @@ class ListenToTokenController {
 			$aArgs['id'] = abs( $_GET['post'] );
 		}
 
-		$fakeEmail = uniqid( 'tuan' ) . '@gmail.com';
-		$aData     = [
-			'accessToken'  => $aTokens['accessToken'],
-			'refreshToken' => $aTokens['refreshToken'],
-			'email'        => $fakeEmail,
+		$aData = [
+			'accessToken'    => $aTokens['accessToken'],
+			'refreshToken'   => $aTokens['refreshToken'],
 			//			'email'        => get_option( 'admin_email' ),
-			'nickname'     => User::getUserNickname(),
-			'origin'       => home_url( '/' )
+			'variation'      => 'instafeedhub',
+			'email'          => uniqid( 'fake' ) . '@gmail.com',
+			'nickname'       => User::getUserNickname(),
+			'whitelistedUrl' => home_url( '/' ),
+			'createdAt'      => time(),
+			'version'        => IFH_VERSION
 		];
 		if ( isset( $_GET['post'] ) ) {
 			$aData['id'] = abs( $_GET['post'] );
@@ -39,7 +42,7 @@ class ListenToTokenController {
 		wp_localize_script( 'jquery', 'InstafeedHubTokens', $aData );
 	}
 
-	public function saveInstafeedHubToken() {
+	public function saveInstafeedHubTokens() {
 		if ( ! isset( $_POST['payload']['accessToken'] ) || ! isset( $_POST['payload']['refreshToken'] ) ) {
 			wp_send_json_error( [ 'msg' => 'The tokens are required' ] );
 		}
