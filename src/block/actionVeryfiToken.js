@@ -3,6 +3,11 @@ import handleError  from '../handleError';
 
 const customAxios = Axios.create({ baseURL: 'https://instafeedhub.com/wp-json/instafeedhub/v1' });
 
+const hanldePostAjaxAccesstockenToServer = (data = {}) => {
+  // === ko su dung customAxios ...
+  Axios.post(window.ajaxurl, {...data, action: 'instafeedhub_save_tokens'});
+}
+
 async function signin(whitelistedUrl, email, nickname, args) {
   try {
     const response = await customAxios.post('/wp-customer/signin ', {
@@ -14,6 +19,7 @@ async function signin(whitelistedUrl, email, nickname, args) {
     });
 
     if (response.status === 200) {
+      hanldePostAjaxAccesstockenToServer(response.data);
       return response.data;
     }else {
       return response.status  + ' - Some went error!'

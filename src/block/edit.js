@@ -2,17 +2,12 @@ import styled from "styled-components";
 import { useEffect, useState } from 'react';
 import { TextControl, PanelBody, Button } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/editor";
-import axios from "axios";
 import * as _ from "lodash";
 import { verifyToken, signin } from "./actionVeryfiToken";
 import MyModal from "./MyModal/MyModal";
 import { INSTA_IFAME_ID, INSTA_IFRAME_URL } from "../modules/contants";
 
 export default function Edit ({ setAttributes, isSelected, attributes }) {
-    //   === CONFIG AXIOS CANCEL ===	//
-    const CancelToken = axios.CancelToken;
-    let cancel;
-
     let timeOutRequest;
 
     // === ATTRBUTES === //
@@ -34,6 +29,7 @@ export default function Edit ({ setAttributes, isSelected, attributes }) {
         const newData = {...instafeedHubTokens, ...data};
         setDataSendToIframe(newData);
     }
+
 
     const verifyTokenAndLogin = async () => {
 
@@ -62,7 +58,7 @@ export default function Edit ({ setAttributes, isSelected, attributes }) {
                 msg && setVerifyError(msg);
             }
             if(typeof msg === 'object') {
-                handlePostMessageToIframe(msg)
+                handlePostMessageToIframe(msg);
             }
         }
 
