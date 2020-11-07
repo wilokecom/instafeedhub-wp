@@ -5,7 +5,14 @@ const customAxios = Axios.create({ baseURL: 'https://instafeedhub.com/wp-json/in
 
 const hanldePostAjaxAccesstockenToServer = (data = {}) => {
   // === ko su dung customAxios ...
-  Axios.post(window.ajaxurl, {...data, action: 'instafeedhub_save_tokens'});
+  var bodyFormData = new FormData();
+  bodyFormData.append({...data, action: 'instafeedhub_save_tokens'});
+  Axios({
+    method: 'POST',
+    url: window.ajaxurl,
+    data: bodyFormData,
+    headers: {'Content-Type': 'multipart/form-data' }
+  })
 }
 
 async function signin(whitelistedUrl, email, nickname, args) {
