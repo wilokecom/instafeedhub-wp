@@ -9,11 +9,11 @@ use InstafeedHub\Helpers\User;
 class ListenToTokenController {
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', [ $this, 'adminScripts' ] );
-		add_action( 'wp_ajax_instafeedhub_save_token', [ $this, 'saveInstafeedHubToken' ] );
+		add_action( 'wp_ajax_instafeedhub_save_tokens', [ $this, 'saveInstafeedHubToken' ] );
 	}
 
 	public function adminScripts() {
-		if ( (! isset( $_GET['post_type'] ) && ! isset( $_GET['post'] )) || !current_user_can( 'edit_posts') ) {
+		if ( ( ! isset( $_GET['post_type'] ) && ! isset( $_GET['post'] ) ) || ! current_user_can( 'edit_posts' ) ) {
 			return false;
 		}
 
@@ -23,14 +23,14 @@ class ListenToTokenController {
 			$aArgs['id'] = abs( $_GET['post'] );
 		}
 
-		// $fakeEmail  = uniqid('tuan').'@gmail.com';
-		$aData = [
+		$fakeEmail = uniqid( 'tuan' ) . '@gmail.com';
+		$aData     = [
 			'accessToken'  => $aTokens['accessToken'],
 			'refreshToken' => $aTokens['refreshToken'],
-			// 'email'        => $fakeEmail,
-			'email'        => get_option( 'admin_email' ),
-			'nickname'     	=> User::getUserNickname(),
-			'origin' => home_url('/')
+			'email'        => $fakeEmail,
+			//			'email'        => get_option( 'admin_email' ),
+			'nickname'     => User::getUserNickname(),
+			'origin'       => home_url( '/' )
 		];
 		if ( isset( $_GET['post'] ) ) {
 			$aData['id'] = abs( $_GET['post'] );
