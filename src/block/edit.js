@@ -53,7 +53,7 @@ export default function Edit ({ setAttributes, isSelected, attributes }) {
                 handlePostMessageToIframe()
             }
         } else {
-            const msg = await signin(origin, email, nickname, args);
+            const msg = await signin(instafeedHubTokens);
             if(typeof msg === 'string') {
                 msg && setVerifyError(msg);
             }

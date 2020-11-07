@@ -18,13 +18,10 @@ const hanldePostAjaxAccesstockenToServer = (data = {}) => {
   Axios.post(window.ajaxurl, bodyFormData, config);
 }
 
-async function signin(whitelistedUrl, email, nickname, args) {
+async function signin(data) {
   try {
     const response = await customAxios.post('/wp-customer/signin ', {
-      whitelistedUrl,
-      email,
-      nickname,
-      args,
+      ...data,
       variation: 'instafeedhub',
     });
 
