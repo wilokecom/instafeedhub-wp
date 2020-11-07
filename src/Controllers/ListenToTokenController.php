@@ -9,7 +9,7 @@ use InstafeedHub\Helpers\User;
 class ListenToTokenController {
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', [ $this, 'adminScripts' ] );
-		add_action( 'wp_ajax_wilcity_save_instafeedhub_tokens', [ $this, 'saveInstafeedHubToken' ] );
+		add_action( 'wp_ajax_instafeedhub_save_token', [ $this, 'saveInstafeedHubToken' ] );
 	}
 
 	public function adminScripts() {
