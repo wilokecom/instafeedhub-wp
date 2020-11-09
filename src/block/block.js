@@ -6,18 +6,18 @@
  */
 /*jshint esversion: 6 */
 //  Import CSS.
-import "./editor.scss";
-import "./style.scss";
-import ContentEditable from "react-contenteditable";
-import styled from "styled-components";
-import { TextControl, Autocomplete, PanelBody } from "@wordpress/components";
-import { InspectorControls } from "@wordpress/editor";
-import Edit from "./edit";
+import './editor.scss';
+import './style.scss';
+import ContentEditable from 'react-contenteditable';
+import styled from 'styled-components';
+import { TextControl, Autocomplete, PanelBody } from '@wordpress/components';
+import { InspectorControls } from '@wordpress/editor';
+import Edit from './edit';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 const { useState, useEffect } = wp.element;
-const labelText = "NAME (Accessible Text Input)";
+const labelText = 'NAME (Accessible Text Input)';
 
 /**
  * Register: aa Gutenberg Block.
@@ -32,30 +32,20 @@ const labelText = "NAME (Accessible Text Input)";
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType("cgb/block-instafeedhub", {
+registerBlockType('cgb/block-instafeedhub', {
   // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-  title: __("InstafeedHub"), // Block title.
-  icon: "shield", // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
-  category: "common", // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
-  keywords: [
-    __("instafeedhub"),
-    __("instagram"),
-  ],
+  title: __('InstafeedHub'), // Block title.
+  icon: 'shield', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
+  category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+  keywords: [__('instafeedhub'), __('instagram')],
   attributes: {
-    value: {
-      type: "string",
-      source: "attribute",
-      selector: "h1",
-      attribute: "data-value",
+    instaId: {
+      type: 'integer',
+      default: 0,
     },
-    options: {
-      type: "array",
-    },
-  },
-  example: {
-    attributes: {
-      value: "",
-      options: [],
+    instaTitle: {
+      type: 'string',
+      default: 'Edit your instaFeed',
     },
   },
 
@@ -83,10 +73,8 @@ registerBlockType("cgb/block-instafeedhub", {
    * @param {Object} props Props.
    * @returns {Mixed} JSX Frontend HTML.
    */
-  save: function (props) {
 
-    return (
-      <h1 data-value={props.attributes.value}>{props.attributes.value}</h1>
-    );
+  save: function (props) {
+    return <h1>HELLO</h1>;
   },
 });
