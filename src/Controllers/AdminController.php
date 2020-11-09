@@ -14,8 +14,8 @@ class AdminController {
 
 	public function registerMenus() {
 		add_menu_page(
-				esc_html__( 'InstafeedHub', 'instafeedhub' ),
-				esc_html__( 'InstafeedHub', 'instafeedhub' ),
+				esc_html__( 'InstafeedHub', 'instafeedhub-wp' ),
+				esc_html__( 'InstafeedHub', 'instafeedhub-wp' ),
 				'administrator',
 				$this->menuSlug,
 				[ $this, 'renderInstafeedHubSettings' ],
