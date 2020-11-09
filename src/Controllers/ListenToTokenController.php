@@ -14,12 +14,15 @@ class ListenToTokenController {
 	}
 
 	public function adminScripts() {
-		if ( ( ! isset( $_GET['post_type'] ) && ! isset( $_GET['post'] ) ) || ! current_user_can( 'edit_posts' ) ) {
+		if (!current_user_can( 'edit_posts' )) {
+			return false;
+		}
+
+		if ( ! isset( $_GET['post_type'] ) && ! isset( $_GET['post'] ) ) {
 			return false;
 		}
 
 		$aTokens = User::getTokens();
-
 		if ( isset( $_GET['post'] ) ) {
 			$aArgs['id'] = abs( $_GET['post'] );
 		}
@@ -27,9 +30,8 @@ class ListenToTokenController {
 		$aData = [
 			'accessToken'    => $aTokens['accessToken'],
 			'refreshToken'   => $aTokens['refreshToken'],
-			//			'email'        => get_option( 'admin_email' ),
+			'email'          => get_option( 'admin_email' ),
 			'variation'      => 'instafeedhub',
-			'email'          => uniqid( 'fake' ) . '@gmail.com',
 			'nickname'       => User::getUserNickname(),
 			'whitelistedUrl' => home_url( '/' ),
 			'createdAt'      => time(),

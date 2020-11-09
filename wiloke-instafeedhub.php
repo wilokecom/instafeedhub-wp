@@ -30,8 +30,12 @@ require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
  */
 require_once plugin_dir_path( __FILE__ ) . 'src/init.php';
 
+use InstafeedHub\Controllers\AdminController;
+use InstafeedHub\Controllers\EnqueueScriptController;
 use InstafeedHub\Controllers\ListenToTokenController;
 use InstafeedHub\Controllers\RemoteDataController;
 
 new RemoteDataController();
 new ListenToTokenController();
+new EnqueueScriptController();
+new AdminController();
