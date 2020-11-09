@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from '@wordpress/element';
 import { TextControl, PanelBody, Button, Icon, IconButton } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/editor';
 import * as _ from 'lodash';
@@ -11,7 +11,7 @@ export default function Edit({ setAttributes, isSelected, attributes, clientId }
   let timeOutRequest;
 
   // === ATTRBUTES === //
-  const { instaId, instaTitle } = attributes;
+  const { instaTitle, instaId } = attributes;
 
   const instaFeedData = window.InstafeedHubTokens;
   // === USESTATE === //
@@ -73,22 +73,32 @@ export default function Edit({ setAttributes, isSelected, attributes, clientId }
     handlePostMessage();
   };
 
-  const handleReceiveFromIframe = async event => {
-    if (!isSelected || event.data.type !== 'CREATE-ITEM') {
+  function handleReceiveFromIframe(event) {
+    if (window.InstafeedHubClientIdActive !== clientId) {
       return;
     }
-    console.log(777, '__handleRecevicePostMessage__', { recevicePostMessage: event.data });
+    if (event.data.type === 'UPDATE-ITEM') {
+      if (event.data.payload.status.includes('success')) {
+        setTimeout(() => {
+          handleCloseModal();
+        }, 500);
+      }
+      return;
+    }
 
-    setAttributes({
-      instaId: event.data.payload.id,
-      instaTitle: event.data.payload.title,
-    });
-
-    setTimeout(() => {
-      handleCloseModal();
-    }, 500);
+    if (event.data.type !== 'CREATE-ITEM') return;
+    console.log(777, '__handleRecevicePostMessage__', { recevicePostMessage: event.data, isSelected, clientId });
+    if (event.data.payload.status.includes('success')) {
+      setAttributes({
+        instaId: event.data.payload.id,
+        instaTitle: event.data.payload.title,
+      });
+      setTimeout(() => {
+        handleCloseModal();
+      }, 500);
+    }
     return;
-  };
+  }
 
   // === USER EFFECT === //
   useEffect(() => {
@@ -101,6 +111,8 @@ export default function Edit({ setAttributes, isSelected, attributes, clientId }
 
   // === HANDLE === //
   const handleClickBtnConnect = () => {
+    window.InstafeedHubClientIdActive = clientId;
+    if (!isSelected) return;
     handleOpenModal();
     verifyTokenAndLogin();
   };
@@ -144,6 +156,7 @@ export default function Edit({ setAttributes, isSelected, attributes, clientId }
   return (
     <div className="wilIntaFeedCp">
       <Button isPrimary onClick={handleClickBtnConnect} className="wilIntaFeedCp__btnEdit" icon={<Icon icon={iconName} />}>
+        {verifyError}
         {!instaId ? 'Connect and Create new a InstaFeed' : `${instaTitle} (${instaId})`}
       </Button>
       {isOpenModal && renderModal()}
