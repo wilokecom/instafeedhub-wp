@@ -22,6 +22,7 @@ if ( ! defined( 'IFH_URL' ) ) {
 	define( 'IFH_NAMESPACE', 'wiloke/v1/instafeedhub' );
 	define( 'IFH_VERSION', 0.1 );
 	define( 'IFH_PREFIX', 'instafeedhub_' );
+	define( 'IFH_ASSETS', plugin_dir_url( __FILE__) . 'assets/' );
 }
 
 require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';

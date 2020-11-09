@@ -4,8 +4,80 @@
 namespace InstafeedHub\Controllers;
 
 class AdminController {
+	private $menuSlug = 'instafeedhub-settings';
+
 	public function __construct() {
 		add_action( 'save_post', [ $this, 'saveInstaIds' ], 10, 2 );
+		add_action( 'admin_menu', [ $this, 'registerMenus' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueueScripts' ] );
+	}
+
+	public function registerMenus() {
+		add_menu_page(
+				esc_html__( 'InstafeedHub', 'instafeedhub' ),
+				esc_html__( 'InstafeedHub', 'instafeedhub' ),
+				'administrator',
+				$this->menuSlug,
+				[ $this, 'renderInstafeedHubSettings' ],
+				'dashicons-instagram'
+		);
+	}
+
+	public function enqueueScripts() {
+		if ( ! current_user_can( 'edit_posts' ) || ! isset( $_GET['page'] ) ||
+			 $_GET['page'] != $this->menuSlug ) {
+			return false;
+		}
+
+		wp_enqueue_style( 'semantic-ui', IFH_ASSETS . 'semantic-ui/semantic.min.css', [] );
+	}
+
+	private function saveTokens() {
+		if ( ! current_user_can( 'administrator' ) ) {
+			return false;
+		}
+
+		if ( ! isset( $_POST['instafeed_hub_token'] ) ) {
+			return false;
+		}
+
+		$aTokens = [];
+		foreach ( $_POST['instafeed_hub_token'] as $key => $val ) {
+			$aTokens[ sanitize_text_field( $key ) ] = trim( sanitize_text_field( $val ) );
+		}
+
+		update_user_meta( get_current_user_id(), 'instafeed_hub_token', $aTokens );
+
+		return true;
+	}
+
+	public function renderInstafeedHubSettings() {
+		$this->saveTokens();
+		$aTokens = get_user_meta( get_current_user_id(), 'instafeed_hub_token', true );
+		if ( empty( $aTokens ) ) {
+			$aTokens = [ 'accessToken' => '', 'refreshToken' => '' ];
+		}
+		?>
+		<div style="margin-top: 20px; max-width: 1200px;">
+			<h1 class="ui dividing header">InstafeedHub Settings</h1>
+			<form class="ui form" method="POST"
+				  action="<?php echo add_query_arg( [ 'page' => $this->menuSlug ], admin_url( 'admin.php' ) ); ?>">
+				<div class="field">
+					<label for="access-token">Access Token</label>
+					<textarea rows="3" id="access-token" name="instafeed_hub_token[accessToken]"><?php echo
+						esc_textarea( $aTokens['accessToken'] ); ?></textarea>
+				</div>
+				<div class="field">
+					<label for="refresh-access-token">Refresh Token</label>
+					<textarea rows="3" id="access-token"
+							  name="instafeed_hub_token[refreshToken]"><?php echo esc_textarea(
+								$aTokens['refreshToken'] ); ?></textarea>
+				</div>
+				<input type="hidden" name="page" value="<?php echo $this->menuSlug; ?>">
+				<button class="ui button green" type="submit">Submit</button>
+			</form>
+		</div>
+		<?php
 	}
 
 	public function saveInstaIds( $postId, $post ) {
