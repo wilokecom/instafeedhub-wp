@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: InstafeedHub
+ * Plugin Name: InstafeedHub WP
  * Plugin URI: https://instafeedhub.com/
  * Description: The easiest way to integrate Instagram to your website
  * Author: instafeedhub
