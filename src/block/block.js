@@ -35,7 +35,7 @@ const labelText = 'NAME (Accessible Text Input)';
 registerBlockType('cgb/block-instafeedhub', {
   // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
   title: __('InstafeedHub'), // Block title.
-  icon: 'shield', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
+  icon: 'instagram', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
   category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
   keywords: [__('instafeedhub'), __('instagram')],
   attributes: {
@@ -75,6 +75,6 @@ registerBlockType('cgb/block-instafeedhub', {
    */
 
   save: function (props) {
-    return <h1>HELLO</h1>;
+    return <div class="wil-instagram-shopify" data-id={props.attributes.instaId}></div>;
   },
 });
