@@ -9,14 +9,21 @@ use InstafeedHub\Helpers\Option;
 class EnqueueScriptController {
 	public function __construct() {
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueueScripts' ] );
+		add_filter( 'body_class', [ $this, 'addClassesToBody' ] );
+	}
+
+	public function addClassesToBody( $aBody ) {
+		$aBody[] = 'template-index';
+
+		return $aBody;
 	}
 
 	public function enqueueScripts() {
-		if ( is_singular() ) {
+		if ( ! is_singular() ) {
 			return false;
 		}
 
-		$aInstaSettings = Option::getInstaSettingsByPostId( get_the_ID());
+		$aInstaSettings = Option::getInstaSettingsByPostId( get_the_ID() );
 		if ( empty( $aInstaSettings ) ) {
 			return false;
 		}
@@ -39,7 +46,7 @@ class EnqueueScriptController {
 		wp_localize_script(
 			'instafeedhub',
 			'__wilInstagramShopify__',
-			[ $aInstaSettings ]
+			array_values( $aInstaSettings)
 		);
 	}
 }

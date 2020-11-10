@@ -39,23 +39,26 @@ class Option {
 	}
 
 	public static function getInstaSettingsByPostId( $postId ) {
-		$aPostIds = get_post_meta( get_the_ID(), 'instafeedhub_ids', true );
-		if ( empty( $aPostIds ) ) {
+		$aInstaIds = get_post_meta( get_the_ID(), 'instafeedhub_ids', true );
+		if ( empty( $aInstaIds ) ) {
 			return [];
 		}
 
 		$aData = self::getInstaSettings();
+
 		if ( empty( $aData ) ) {
 			return [];
 		}
 
-		$aPostIdSettings = [];
-		foreach ( $aPostIds as $postId ) {
-			if ( isset( $aData[ $postId ] ) ) {
-				$aPostIdSettings[] = $aData[ $postId ];
+		$aInstaSettings = [];
+		foreach ( $aInstaIds as $instaId ) {
+			if ( isset( $aData[ $instaId ] ) ) {
+				foreach ($aData[$instaId] as $key => $val){
+					$aInstaSettings[$postId][$key] = InstaSettingValueFormat::correctValueType($val, $key);
+				}
 			}
 		}
 
-		return $aPostIdSettings;
+		return $aInstaSettings;
 	}
 }

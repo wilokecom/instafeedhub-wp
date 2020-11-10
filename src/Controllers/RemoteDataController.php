@@ -45,7 +45,7 @@ class RemoteDataController {
 	 * @return array|\WP_REST_Response
 	 */
 	public function updateData( \WP_REST_Request $oRequest ) {
-		if ( $this->verifyAcessToken() == false ) {
+		if ( $this->verifyAccessToken() == false ) {
 			return Message::error( __( 'The access token is invalid', 'wiloke-instafeedhub-wp' ), 400 );
 		}
 
@@ -58,7 +58,7 @@ class RemoteDataController {
 		$aData  = Option::getInstaSettings();
 
 		if ( empty( $aData ) ) {
-			Option::updateInstaSettings( [ $aParams ] );
+			Option::updateInstaSettings([$postID => $aParams]);
 		} else {
 			if ( isset( $aData[ $postID ] ) ) {
 				if ( $aParams['status'] !== 'publish' ) {
