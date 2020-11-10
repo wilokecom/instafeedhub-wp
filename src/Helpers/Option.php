@@ -41,24 +41,33 @@ class Option {
 	public static function getInstaSettingsByPostId( $postId ) {
 		$aInstaIds = get_post_meta( get_the_ID(), 'instafeedhub_ids', true );
 		if ( empty( $aInstaIds ) ) {
-			return [];
+			return apply_filters(
+				'instafeedhub/filter/src/Helpers/Option/getInstaSettingsByPostId/my-insta-settings',
+				[]
+			);
 		}
 
 		$aData = self::getInstaSettings();
 
 		if ( empty( $aData ) ) {
-			return [];
+			return apply_filters(
+				'instafeedhub/filter/src/Helpers/Option/getInstaSettingsByPostId/my-insta-settings',
+				[]
+			);
 		}
 
 		$aInstaSettings = [];
 		foreach ( $aInstaIds as $instaId ) {
 			if ( isset( $aData[ $instaId ] ) ) {
-				foreach ($aData[$instaId] as $key => $val){
-					$aInstaSettings[$postId][$key] = InstaSettingValueFormat::correctValueType($val, $key);
+				foreach ( $aData[ $instaId ] as $key => $val ) {
+					$aInstaSettings[ $postId ][ $key ] = InstaSettingValueFormat::correctValueType( $val, $key );
 				}
 			}
 		}
 
-		return $aInstaSettings;
+		return apply_filters(
+			'instafeedhub/filter/src/Helpers/Option/getInstaSettingsByPostId/my-insta-settings',
+			$aInstaSettings
+		);
 	}
 }
