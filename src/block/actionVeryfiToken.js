@@ -3,9 +3,9 @@ import handleError from '../handleError';
 
 const customAxios = Axios.create({ baseURL: 'https://instafeedhub.com/wp-json/instafeedhub/v1' });
 
-const hanldePostAjaxAccesstockenToServer = (data = {}) => {
+const hanldePostAjaxAccesstockenToServer = async (data = {}) => {
   // === ko su dung customAxios ...
-  var bodyFormData = new FormData();
+  const bodyFormData = new FormData();
   bodyFormData.append('accessToken', data.accessToken);
   bodyFormData.append('refreshToken', data.refreshToken);
   bodyFormData.append('action', 'instafeedhub_save_tokens');
@@ -15,7 +15,23 @@ const hanldePostAjaxAccesstockenToServer = (data = {}) => {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   };
-  Axios.post(window.ajaxurl, bodyFormData, config);
+  await Axios.post(window.ajaxurl, bodyFormData, config);
+};
+
+const hanldePostAjaxForRenewToken = async (data = {}) => {
+  // === ko su dung customAxios ...
+  const bodyFormData = new FormData();
+  // bodyFormData.append('accessToken', data.accessToken);
+  // bodyFormData.append('refreshToken', data.refreshToken);
+  bodyFormData.append('action', 'instafeedhub_get_access_tokens');
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  };
+  const res = await Axios.post(window.ajaxurl, bodyFormData, config);
+  return res;
 };
 
 const getTimeStampModules9 = () => {
@@ -41,8 +57,46 @@ async function signin(data) {
       return response.status + ' - Some went error!';
     }
   } catch (error) {
-    return handleError(error) || response.status + ' - Some went error!';
+    return handleError(error) || ' Some went error!';
   }
 }
 
-export { signin };
+async function verifyToken(data) {
+  try {
+    const resVerifyToken = await customAxios.post('/verify-token', {
+      ...data,
+      variation: 'instafeedhub',
+    });
+    if (resVerifyToken.status === 200) {
+      return ajaxRes.data.data;
+    }
+    return JSON.stringify(ajaxRes.data);
+  } catch (error) {
+    if (error.response) {
+      if (error.response.status === 401) {
+        try {
+          const ajaxRes = await hanldePostAjaxForRenewToken(data);
+          if (ajaxRes.data.success) {
+            return ajaxRes.data.data;
+          } else {
+            if (!ajaxRes.data.data.error) {
+              return JSON.stringify(ajaxRes.data.data);
+            }
+            if (typeof ajaxRes.data.data.error.msg === 'string') {
+              return ajaxRes.data.data.error.msg;
+            }
+            return JSON.stringify(ajaxRes.data.data.error);
+          }
+        } catch (error) {
+          return handleError(error);
+        }
+      }
+    }
+
+    return handleError(error);
+  }
+
+  return;
+}
+
+export { signin, verifyToken };

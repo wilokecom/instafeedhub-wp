@@ -13,12 +13,13 @@ export default function Edit({ setAttributes, isSelected, attributes, clientId }
   // === ATTRBUTES === //
   const { instaTitle, instaId } = attributes;
 
-  const instaFeedData = window.InstafeedHubTokens;
   // === USESTATE === //
   const [isVerify, setIsVerify] = useState(false);
   const [verifyError, setVerifyError] = useState('');
   const [isOpenModal, setOpenModal] = useState(false);
   const [isPostMessageDone, setPostMessageDone] = useState(false);
+
+  const instaFeedData = () => window.InstafeedHubTokens || {};
 
   // === HANDLE === //
   const handleOpenModal = () => setOpenModal(true);
@@ -28,20 +29,30 @@ export default function Edit({ setAttributes, isSelected, attributes, clientId }
   };
 
   const verifyTokenAndLogin = async () => {
-    if (!instaFeedData || _.isEmpty(instaFeedData)) {
+    if (!instaFeedData() || _.isEmpty(instaFeedData())) {
       return setVerifyError('Oop! InstafeedHubTokens could not Empty.');
     }
     setIsVerify(true);
 
-    const { accessToken } = instaFeedData;
+    const { accessToken } = instaFeedData();
     if (!accessToken) {
-      const msg = await signin(instaFeedData);
-      if (typeof msg === 'string') {
-        msg && setVerifyError(msg);
+      const msg = await signin(instaFeedData());
+      if (typeof msg === 'string' && !!msg) {
+        setVerifyError(msg);
       }
       if (typeof msg === 'object') {
         //  === update lai bien window de nhung component khac su dung luon === //
         window.InstafeedHubTokens = { ...window.InstafeedHubTokens, ...msg };
+      }
+    } else {
+      const verifyRes = await verifyToken(instaFeedData());
+      console.log(88, { verifyRes });
+      if (typeof verifyRes === 'string' && !!verifyRes) {
+        setVerifyError(verifyRes);
+      }
+      if (typeof verifyRes === 'object') {
+        //  === update lai bien window de nhung component khac su dung luon === //
+        window.InstafeedHubTokens = { ...window.InstafeedHubTokens, ...verifyRes };
       }
     }
 
@@ -53,10 +64,10 @@ export default function Edit({ setAttributes, isSelected, attributes, clientId }
     const iframeWeb = document.getElementById(INSTA_IFAME_ID);
     if (!iframeWeb) return;
     const wn = iframeWeb.contentWindow;
-    let payloadData = instaFeedData;
+    let payloadData = instaFeedData();
     if (!!instaId) {
       payloadData = {
-        ...instaFeedData,
+        ...instaFeedData(),
         args: {
           id: instaId,
         },
@@ -93,6 +104,13 @@ export default function Edit({ setAttributes, isSelected, attributes, clientId }
 
   // === USER EFFECT === //
   useEffect(() => {
+    window.InstafeedHubTokens = {
+      ...(window.InstafeedHubTokens || {}),
+      accessToken:
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZXNzYWdlIjoie1widXNlcklEXCI6MjQ4LFwidXNlck5hbWVcIjpcInRlc3RyZWZyZXNodG9rZW4xXCIsXCJ1c2VyRW1haWxcIjpcInRlc3RyZWZyZXNodG9rZW4xQGdtYWlsLmNvbVwiLFwicm9sZVwiOlwiYWRtaW5pc3RyYXRvclwifSIsImV4cCI6MTYwNDk5MzA4NH0.jI3C4B_bYcYpJ2GeQwxVnDqm76W2YXk2fA5rue6UE_Y',
+      refreshToken:
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZXNzYWdlIjoie1widXNlcklEXCI6MjQ4LFwidXNlck5hbWVcIjpcInRlc3RyZWZyZXNodG9rZW4xXCIsXCJ1c2VyRW1haWxcIjpcInRlc3RyZWZyZXNodG9rZW4xQGdtYWlsLmNvbVwiLFwicm9sZVwiOlwiYWRtaW5pc3RyYXRvclwifSIsImV4cCI6MTY5MTM5MzA3OX0.kJsChlnf1MNUsXk-3rUgHxLSF-iYT-ymkKVLTK5n7Ww',
+    };
     //
     window.addEventListener('message', handleReceiveFromIframe);
     return () => {
