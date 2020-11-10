@@ -27,8 +27,12 @@ class ListenToTokenController {
 		}
 
 		$response = wp_remote_post( 'https://instafeedhub.com/wp-json/instafeedhub/v1/renew-token', [
-			'body' => [
-				'refreshToken' => $aTokens['refreshToken']
+			'timeout'     => 5,
+			'redirection' => 5,
+			'blocking'    => true,
+			'body'        => [
+				'refreshToken' => $aTokens['refreshToken'],
+				'accessToken'  => $aTokens['accessToken']
 			]
 		] );
 
@@ -36,10 +40,10 @@ class ListenToTokenController {
 			return Message::error( [ 'msg' => esc_html__( 'Server Error', 'instafeedhub-wp' ) ], 503 );
 		}
 
-		$aResponse = json_decode( wp_remote_retrieve_body( $response ) );
+		$aResponse = json_decode( wp_remote_retrieve_body( $response ), true );
 
 		if ( $aResponse['status'] == 'error' ) {
-			return Message::error( [ 'msg' => $aResponse['msg'] ], isset( $aResponse['code']) ? $aResponse['code'] :
+			return Message::error( [ 'msg' => $aResponse['msg'] ], isset( $aResponse['code'] ) ? $aResponse['code'] :
 				401 );
 		}
 
