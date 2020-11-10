@@ -68,7 +68,8 @@ async function verifyToken(data) {
       variation: 'instafeedhub',
     });
     if (resVerifyToken.status === 200) {
-      return ajaxRes.data.data;
+      // return resVerifyToken.data.data;
+      return {};
     }
     return JSON.stringify(ajaxRes.data);
   } catch (error) {
