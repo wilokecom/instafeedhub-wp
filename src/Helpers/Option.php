@@ -8,6 +8,7 @@ namespace InstafeedHub\Helpers;
  */
 class Option {
 	private static $optionKey = 'wil_insta_shopify';
+	private static $tokenKey  = 'instafeedhub_tokens';
 
 	/**
 	 * @param $key
@@ -24,6 +25,24 @@ class Option {
 	 */
 	public static function update( $key, $value ) {
 		update_option( $key, $value );
+	}
+
+	/**
+	 * @param $aTokens ['accessToken' => '', 'refreshToken' => '']
+	 */
+	public static function saveTokens( $aTokens ) {
+		update_option( self::$tokenKey, $aTokens );
+
+		return $aTokens;
+	}
+
+	public static function getTokens( ) {
+		$aTokens = get_option( self::$tokenKey);
+		if ( empty( $aTokens ) ) {
+			return [ 'accessToken' => '', 'refreshToken' => '' ];
+		}
+
+		return $aTokens;
 	}
 
 	public static function updateInstaSettings( $aData ) {

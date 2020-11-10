@@ -3,6 +3,8 @@
 
 namespace InstafeedHub\Controllers;
 
+use InstafeedHub\Helpers\Option;
+
 class AdminController {
 	private $menuSlug = 'instafeedhub-settings';
 
@@ -46,17 +48,14 @@ class AdminController {
 			$aTokens[ sanitize_text_field( $key ) ] = trim( sanitize_text_field( $val ) );
 		}
 
-		update_user_meta( get_current_user_id(), 'instafeed_hub_token', $aTokens );
+		Option::saveTokens( $aTokens );
 
 		return true;
 	}
 
 	public function renderInstafeedHubSettings() {
 		$this->saveTokens();
-		$aTokens = get_user_meta( get_current_user_id(), 'instafeed_hub_token', true );
-		if ( empty( $aTokens ) ) {
-			$aTokens = [ 'accessToken' => '', 'refreshToken' => '' ];
-		}
+		$aTokens = Option::getTokens();
 		?>
 		<div style="margin-top: 20px; max-width: 1200px;">
 			<h1 class="ui dividing header">InstafeedHub Settings</h1>
