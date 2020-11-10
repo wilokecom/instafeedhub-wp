@@ -104,13 +104,6 @@ export default function Edit({ setAttributes, isSelected, attributes, clientId }
 
   // === USER EFFECT === //
   useEffect(() => {
-    window.InstafeedHubTokens = {
-      ...(window.InstafeedHubTokens || {}),
-      accessToken:
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZXNzYWdlIjoie1widXNlcklEXCI6MjQ4LFwidXNlck5hbWVcIjpcInRlc3RyZWZyZXNodG9rZW4xXCIsXCJ1c2VyRW1haWxcIjpcInRlc3RyZWZyZXNodG9rZW4xQGdtYWlsLmNvbVwiLFwicm9sZVwiOlwiYWRtaW5pc3RyYXRvclwifSIsImV4cCI6MTYwNDk5MzA4NH0.jI3C4B_bYcYpJ2GeQwxVnDqm76W2YXk2fA5rue6UE_Y',
-      refreshToken:
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtZXNzYWdlIjoie1widXNlcklEXCI6MjQ4LFwidXNlck5hbWVcIjpcInRlc3RyZWZyZXNodG9rZW4xXCIsXCJ1c2VyRW1haWxcIjpcInRlc3RyZWZyZXNodG9rZW4xQGdtYWlsLmNvbVwiLFwicm9sZVwiOlwiYWRtaW5pc3RyYXRvclwifSIsImV4cCI6MTY5MTM5MzA3OX0.kJsChlnf1MNUsXk-3rUgHxLSF-iYT-ymkKVLTK5n7Ww',
-    };
     //
     window.addEventListener('message', handleReceiveFromIframe);
     return () => {
