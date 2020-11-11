@@ -145,7 +145,7 @@ class RootWidget extends \WP_Widget
 	protected function printDesc($aFields)
 	{
 		if (isset($aFields['desc']) && !empty($aFields['desc'])) {
-			echo '<p>' . esc_html__($aFields['desc'], 'wiloke-instafeedhub-wp') . '</p>';
+			echo '<p>' . esc_html__($aFields['desc'], 'instafeedhub-wp') . '</p>';
 		}
 	}
 }

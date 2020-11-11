@@ -32,7 +32,7 @@ class InstagramFeed extends RootWidget
 	{
 		parent::__construct(
 			$this->baseID,
-			esc_html__('Instagram Feed', 'wiloke-instafeedhub-wp')
+			esc_html__('Instagram Feed', 'instafeedhub-wp')
 		);
 	}
 
