@@ -1,12 +1,12 @@
 <?php
 
-namespace InstafeedHub\Controllers\Widget;
+namespace InstafeedHub\Widgets;
 
 /**
- * Class InstagramFeedController
- * @package InstafeedHub\Controllers\Widget
+ * Class InstagramFeed
+ * @package InstafeedHub\Widgets
  */
-class InstagramFeedController extends BaseWidget
+class InstagramFeed extends RootWidget
 {
 	/**
 	 * @var string
@@ -26,7 +26,7 @@ class InstagramFeedController extends BaseWidget
 		];
 
 	/**
-	 * InstagramFeedController constructor.
+	 * InstagramFeed constructor.
 	 */
 	public function __construct()
 	{

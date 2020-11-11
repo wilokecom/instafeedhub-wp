@@ -1,12 +1,12 @@
 <?php
 
-namespace InstafeedHub\Controllers\Widget;
+namespace InstafeedHub\Widgets;
 
 /**
- * Class BaseWidget
- * @package InstafeedHub\Controllers\Widget
+ * Class RootWidget
+ * @package InstafeedHub\Widgets
  */
-class BaseWidget extends \WP_Widget
+class RootWidget extends \WP_Widget
 {
 	/**
 	 * @param $aFields
