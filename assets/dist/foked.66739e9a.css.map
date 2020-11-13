@@ -1,0 +1,1 @@
+{"version":3,"sources":["styles.scss"],"names":[],"mappings":"AACI,qBACI","file":"foked.66739e9a.css","sourceRoot":"..","sourcesContent":[".isClicked {\n    .btnClick {\n        display: none;\n    }\n}"]}

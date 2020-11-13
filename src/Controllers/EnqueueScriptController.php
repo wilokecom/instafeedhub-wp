@@ -10,6 +10,7 @@ class EnqueueScriptController {
 	public function __construct() {
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueueScripts' ] );
 		add_filter( 'body_class', [ $this, 'addClassesToBody' ] );
+		
 	}
 
 	public function addClassesToBody( $aBody ) {
@@ -48,5 +49,8 @@ class EnqueueScriptController {
 			'__wilInstagramShopify__',
 			array_values( $aInstaSettings)
 		);
+
+	
+
 	}
 }

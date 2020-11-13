@@ -32,6 +32,7 @@ class AdminController {
 		}
 
 		wp_enqueue_style( 'semantic-ui', IFH_ASSETS . 'semantic-ui/semantic.min.css', [] );
+		
 	}
 
 	private function saveTokens() {

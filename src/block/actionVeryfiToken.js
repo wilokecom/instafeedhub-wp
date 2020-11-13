@@ -71,7 +71,7 @@ async function verifyToken(data) {
       // return resVerifyToken.data.data;
       return {};
     }
-    return JSON.stringify(ajaxRes.data);
+    return JSON.stringify(resVerifyToken.data);
   } catch (error) {
     if (error.response) {
       if (error.response.status === 401) {
