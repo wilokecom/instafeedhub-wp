@@ -12,6 +12,7 @@ class Init
 	{
 		add_action('widgets_init', [$this, 'register']);
 		add_action('admin_enqueue_scripts', [$this, 'handleWidget']);
+		add_action('wp_ajax_nopriv_save_instagram_widget', [$this, 'saveInstagramWidget']);
 	}
 
 	public function register()
@@ -72,5 +73,10 @@ class Init
 		}
 
 		return $aElements;
+	}
+
+	public function saveInstagramWidget()
+	{
+
 	}
 }
