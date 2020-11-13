@@ -13,28 +13,9 @@ class Init
 		add_action('widgets_init', function () {
 			register_widget('InstafeedHub\Widgets\InstagramFeed');
 		});
-//		add_action('init', [$this, 'init']);
+
 		add_action('admin_enqueue_scripts', [$this, 'handleWidget']);
 	}
-
-//	public function init()
-//	{
-////		$aSidebarWidget = wp_get_sidebars_widgets();
-////		echo "<pre>";
-////		print_r($aSidebarWidget);
-////		echo "</pre>";
-////		die;
-////		echo "<pre>";
-////		print_r(wp_get_sidebars_widgets());
-////		echo "</pre>";
-////		die;
-//		//		echo _get_widget_id_base('instagram-feed-4');
-////		global $wp_widget_factory, $wp_registered_widgets, $wp_registered_sidebars;
-////		echo "<pre>";
-////		print_r($wp_registered_widgets);
-////		echo "</pre>";
-////		die;
-//	}
 
 	public function handleWidget()
 	{
@@ -50,8 +31,6 @@ class Init
 			);
 			wp_localize_script('jquery', 'instafeedHubElements', $this->getInstafeedHubElements());
 		}
-
-
 	}
 
 	/**

@@ -1,13 +1,13 @@
 jQuery(document).ajaxComplete(function (event, xhr, settings) {
     let data = settings.data;
-    let Params = new URLSearchParams(data);
-    if (Params.get('action') == 'save-widget' && Params.get('id_base') == 'instagram-feed') {
+    let param = new URLSearchParams(data);
+    if (param.get('action') === 'save-widget' && param.get('id_base') === 'instagram-feed') {
         //Add
-        if (Params.get('add_new') == 'multi') {
+        if (param.get('add_new') === 'multi') {
         }
 
         //Delete
-        if (!!Params.get('delete_widget')) {
+        if (!!param.get('delete_widget')) {
             //Something here
         }
     }
