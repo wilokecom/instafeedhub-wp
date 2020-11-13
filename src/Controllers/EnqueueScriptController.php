@@ -38,7 +38,7 @@ class EnqueueScriptController {
 		wp_enqueue_script(
 			'instafeedhub',
 			'https://insta-layout.netlify.app/main.js',
-			[],
+			['jquery'],
 			IFH_VERSION,
 			true
 		);
