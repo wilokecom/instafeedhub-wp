@@ -9,7 +9,8 @@ use InstafeedHub\Helpers\Message;
  * Class RemoteDataController
  * @package InstaFeedHub\Controllers
  */
-class RemoteDataController {
+class RemoteDataController
+{
 	/**
 	 * @var string
 	 */
@@ -18,21 +19,23 @@ class RemoteDataController {
 	/**
 	 * RemoteDataController constructor.
 	 */
-	public function __construct() {
-		add_action( 'rest_api_init', [ $this, 'registerRouter' ] );
+	public function __construct()
+	{
+		add_action('rest_api_init', [$this, 'registerRouter']);
 	}
 
-	public function registerRouter() {
-		register_rest_route( IFH_NAMESPACE, '/remote-data',
+	public function registerRouter()
+	{
+		register_rest_route(IFH_NAMESPACE, '/remote-data',
 			[
 				[
 					'methods'             => 'POST',
-					'callback'            => [ $this, 'updateData' ],
+					'callback'            => [$this, 'updateData'],
 					'permission_callback' => '__return_true'
 				],
 				[
 					'methods'             => 'DELETE',
-					'callback'            => [ $this, 'deleteData' ],
+					'callback'            => [$this, 'deleteData'],
 					'permission_callback' => '__return_true'
 				]
 			]
@@ -44,45 +47,46 @@ class RemoteDataController {
 	 *
 	 * @return array|\WP_REST_Response
 	 */
-	public function updateData( \WP_REST_Request $oRequest ) {
-		if ( $this->verifyAccessToken() == false ) {
-			return Message::error( __( 'The access token is invalid', 'wiloke-instafeedhub-wp' ), 400 );
+	public function updateData(\WP_REST_Request $oRequest)
+	{
+		if ($this->verifyAccessToken() == false) {
+			return Message::error(__('The access token is invalid', 'instafeedhub-wp'), 400);
 		}
 
 		$aParams = $oRequest->get_params();
-		if ( empty( $aParams ) ) {
-			return Message::error( __( 'There is no data', 'wiloke-instafeedhub-wp' ), 400 );
+		if (empty($aParams)) {
+			return Message::error(__('There is no data', 'instafeedhub-wp'), 400);
 		}
 
 		$postID = $aParams['id'];
-		$aData  = Option::getInstaSettings();
+		$aData = Option::getInstaSettings();
 
-		if ( empty( $aData ) ) {
+		if (empty($aData)) {
 			Option::updateInstaSettings([$postID => $aParams]);
 		} else {
-			if ( isset( $aData[ $postID ] ) ) {
-				if ( $aParams['status'] !== 'publish' ) {
-					unset( $aData[ $postID ] );
+			if (isset($aData[$postID])) {
+				if ($aParams['status'] !== 'publish') {
+					unset($aData[$postID]);
 				} else {
-					foreach ( $aParams as $pKey => $pVal ) {
-						if ( is_numeric( $pKey ) ) {
-							$aParams[ $pKey ] = floatval( $pVal );
+					foreach ($aParams as $pKey => $pVal) {
+						if (is_numeric($pKey)) {
+							$aParams[$pKey] = floatval($pVal);
 						}
 					}
-					$aData[ $postID ] = $aParams;
+					$aData[$postID] = $aParams;
 				}
 
-				Option::updateInstaSettings( $aData );
+				Option::updateInstaSettings($aData);
 			} else {
-				if ( $aParams['status'] !== 'publish' ) {
-					return Message::error( __( 'This post status is not publish', 'wiloke-instafeedhub' ), 400 );
+				if ($aParams['status'] !== 'publish') {
+					return Message::error(__('This post status is not publish', 'instafeedhub-wp'), 400);
 				}
-				$aData[ $postID ] = $aParams;
-				Option::updateInstaSettings( $aData );
+				$aData[$postID] = $aParams;
+				Option::updateInstaSettings($aData);
 			}
 		}
 
-		return Message::success( __( 'This post has been update successfully' ) );
+		return Message::success(__('This post has been update successfully'));
 	}
 
 	/**
@@ -90,38 +94,40 @@ class RemoteDataController {
 	 *
 	 * @return array|\WP_REST_Response
 	 */
-	public function deleteData( \WP_REST_Request $oRequest ) {
-		if ( $this->verifyAccessToken() == false ) {
-			return Message::error( __( 'The access token is invalid', 'wiloke-instafeedhub' ), 400 );
+	public function deleteData(\WP_REST_Request $oRequest)
+	{
+		if ($this->verifyAccessToken() == false) {
+			return Message::error(__('The access token is invalid', 'instafeedhub-wp'), 400);
 		}
 
-		$postID = $oRequest->get_param( 'id' );
+		$postID = $oRequest->get_param('id');
 
-		if ( empty( $postID ) ) {
-			return Message::error( __( 'The post id is required', 'wiloke-instafeedhub-wp' ), 400 );
+		if (empty($postID)) {
+			return Message::error(__('The post id is required', 'instafeedhub-wp'), 400);
 		}
 		$aData = Option::getInstaSettings();
 
-		if ( empty( $aData ) ) {
-			return Message::error( __( 'This post has been deleted or it does not exist', 'wiloke-instafeedhub-wp' ),
-				400 );
+		if (empty($aData)) {
+			return Message::error(__('This post has been deleted or it does not exist', 'instafeedhub-wp'),
+				400);
 		} else {
-			if ( is_array( $aData ) && isset( $aData[ $postID ] ) ) {
-				unset( $aData[ $postID ] );
-				Option::updateInstaSettings( $aData );
+			if (is_array($aData) && isset($aData[$postID])) {
+				unset($aData[$postID]);
+				Option::updateInstaSettings($aData);
 			} else {
-				return Message::error( __( 'This post has been deleted or it does not exist', 'wiloke-instafeedhub' ),
-					400 );
+				return Message::error(__('This post has been deleted or it does not exist', 'instafeedhub-wp'),
+					400);
 			}
 		}
 
-		return Message::success( 'This post has been deleted successfully' );
+		return Message::success('This post has been deleted successfully');
 	}
 
 	/**
 	 * @return array|bool|string|\WP_REST_Response
 	 */
-	public function verifyAccessToken() {
-		return trim( $_SERVER['HTTP_DOMAIN'], '/' ) === trim( IFH_URL, '/' );
+	public function verifyAccessToken()
+	{
+		return trim($_SERVER['HTTP_DOMAIN'], '/') === trim(IFH_URL, '/');
 	}
 }
