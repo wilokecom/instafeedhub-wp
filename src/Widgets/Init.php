@@ -67,6 +67,7 @@ class Init
 		$aElements = [];
 		foreach ($aWidgetIDs as $widgetID) {
 			$aElements[$widgetID] = [
+				'widgetID'    => $widgetID,
 				'buttonID'    => 'widget-' . $widgetID . '-button',
 				'instagramID' => ''
 			];
