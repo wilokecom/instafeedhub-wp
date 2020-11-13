@@ -111,10 +111,7 @@ class RootWidget extends \WP_Widget
 				name="<?php echo $this->get_field_name($fieldKey); ?>"
 				id="<?php echo $this->get_field_id($fieldKey); ?>"
 			>
-				<p>
-					<?php echo esc_html__($aArgs['name']); ?>
-				</p>
-				<button>Click Me!</button>
+				<?php echo esc_html__($aArgs['name']); ?>
 			</div>
 			<?php echo $this->printDesc($aArgs); ?>
         </div>

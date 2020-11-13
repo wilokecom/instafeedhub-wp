@@ -34,15 +34,15 @@ class Init
 			);
 			//	=== EDEN TUAN JS === //
 			wp_enqueue_script(
-				'instafeedhub1',
-				IFH_ASSETS.'forWidget/foked.478f9b11.js',
+				'instafeedhub-fokedJs',
+				IFH_ASSETS.'forWidget/foked.js',
 				[],
 				IFH_VERSION,
 				true
 			);
 			wp_enqueue_style(
-				'instafeedhub-style',
-				IFH_ASSETS.'foked.2d9639e8.css',
+				'instafeedhub-fokedCss',
+				IFH_ASSETS.'forWidget/foked.css',
 				[],
 				IFH_VERSION,
 			);
