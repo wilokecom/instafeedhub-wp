@@ -107,7 +107,7 @@ class RootWidget extends \WP_Widget
 		?>
         <div class="field-item" style="margin-top: 20px">
             <button class="widefat" name="<?php echo $this->get_field_name($fieldKey); ?>" id="<?php echo
-			$this->get_field_id($fieldKey); ?>"><?php echo esc_html__($aArgs['name']); ?></button>
+			$this->get_field_id($fieldKey); ?>"></button>
 			<?php echo $this->printDesc($aArgs); ?>
         </div>
 		<?php
