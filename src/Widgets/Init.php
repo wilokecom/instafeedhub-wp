@@ -2,6 +2,8 @@
 
 namespace InstafeedHub\Widgets;
 
+use InstafeedHub\Helpers\Widget;
+
 /**
  * Class Init
  * @package InstafeedHub\Widgets
@@ -52,39 +54,20 @@ class Init
 	}
 
 	/**
-	 * @param $baseID
-	 * @return array
-	 */
-	public function getWidgetID($baseID)
-	{
-		$aSidebarWidget = wp_get_sidebars_widgets();
-		$aWidgetIDs = [];
-		foreach ($aSidebarWidget as $sideBar => $aWidget) {
-			foreach ($aWidget as $key => $widgetID) {
-				if (_get_widget_id_base($widgetID) == $baseID) {
-					$aWidgetIDs[] = $widgetID;
-				}
-			}
-		}
-
-		return $aWidgetIDs;
-	}
-
-	/**
 	 * @return array|object
 	 */
 	public function getInstafeedHubElements()
 	{
-		$aWidgetIDs = $this->getWidgetID('instagram-feed');
+		$aWidgetIDs = Widget::getWidgetIDsByBaseID();
 		if (empty($aWidgetIDs)) {
 			return (object)[];
 		}
 		$aElements = [];
 		$aInstaWidget = get_option('widget_instagram-feed');
 		foreach ($aWidgetIDs as $widgetID) {
-			$number = intval(end(explode('-', $widgetID)));
-			$instaID = ($aInstaWidget[$number]['instaId'] == null) ? '' : $aInstaWidget[$number]['instaId'];
-			$instaTitle = ($aInstaWidget[$number]['instaTitle'] == null) ? '' : $aInstaWidget[$number]['instaTitle'];
+			$index = intval(end(explode('-', $widgetID)));
+			$instaID = ($aInstaWidget[$index]['instaId'] == null) ? '' : $aInstaWidget[$index]['instaId'];
+			$instaTitle = ($aInstaWidget[$index]['instaTitle'] == null) ? '' : $aInstaWidget[$index]['instaTitle'];
 			$aElements[$widgetID] = [
 				'widgetID'       => $widgetID,
 				'buttonID'       => 'widget-' . $widgetID . '-button',
@@ -107,9 +90,9 @@ class Init
 
 		$aInstaWidget = get_option('widget_instagram-feed');
 		$widgetID = $_POST['widgetID'];
-		$number = intval(end(explode('-', $widgetID)));
+		$index = intval(end(explode('-', $widgetID)));
 
-		$aInstaWidget[$number] = [
+		$aInstaWidget[$index] = [
 			'widgetID'   => $widgetID,
 			'instaId'    => $_POST['instaId'],
 			'instaTitle' => $_POST['instaTitle'],

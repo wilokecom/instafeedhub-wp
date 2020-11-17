@@ -2,6 +2,7 @@
 
 namespace InstafeedHub\Widgets;
 
+use InstafeedHub\Helpers\Widget;
 /**
  * Class InstagramFeed
  * @package InstafeedHub\Widgets
@@ -11,7 +12,7 @@ class InstagramFeed extends RootWidget
 	/**
 	 * @var string
 	 */
-	private $baseID = 'instagram-feed';
+	private $baseID = 'instagram-feedhub';
 
 	/**
 	 * @var array
@@ -42,7 +43,11 @@ class InstagramFeed extends RootWidget
 	 */
 	public function widget($args, $aInstance)
 	{
-
+		$widgetID = $args['widget_id'];
+		$instaID = Widget::getInstaIDByWidgetID($widgetID);
+		?>
+        <div class="wil-instagram-shopify" data-id="<?php echo esc_html($instaID); ?>"></div>
+		<?php
 	}
 
 	/**
