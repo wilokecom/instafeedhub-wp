@@ -86,8 +86,8 @@ class Init
 			$aElements[$widgetID] = [
 				'widgetID'       => $widgetID,
 				'buttonID'       => 'widget-' . $widgetID . '-button',
-				'instagramID'    => $aInstaWidget[$number]['instaId'],
-				'instagramTitle' => $aInstaWidget[$number]['instaTitle'],
+				'instagramID'    => empty($aInstaWidget[$number]['instaId']) ? '' : $aInstaWidget[$number]['instaId'],
+				'instagramTitle' => empty($aInstaWidget[$number]['instaTitle']) ? '' : $aInstaWidget[$number]['instaTitle']
 			];
 		}
 
