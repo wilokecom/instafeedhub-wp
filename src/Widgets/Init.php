@@ -83,11 +83,13 @@ class Init
 		$aInstaWidget = get_option('widget_instagram-feed');
 		foreach ($aWidgetIDs as $widgetID) {
 			$number = end(explode('-', $widgetID));
+			$instaID = ($aInstaWidget[$number]['instaId'] == null) ? '' : $aInstaWidget[$number]['instaId'];
+			$instaTitle = ($aInstaWidget[$number]['instaTitle'] == null) ? '' : $aInstaWidget[$number]['instaTitle'];
 			$aElements[$widgetID] = [
 				'widgetID'       => $widgetID,
 				'buttonID'       => 'widget-' . $widgetID . '-button',
-				'instagramID'    => empty($aInstaWidget[$number]['instaId']) ? '' : $aInstaWidget[$number]['instaId'],
-				'instagramTitle' => empty($aInstaWidget[$number]['instaTitle']) ? '' : $aInstaWidget[$number]['instaTitle']
+				'instagramID'    => $instaID,
+				'instagramTitle' => $instaTitle
 			];
 		}
 
