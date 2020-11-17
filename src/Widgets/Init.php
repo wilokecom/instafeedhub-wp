@@ -93,6 +93,9 @@ class Init
 		return $aElements;
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function saveInstagramWidget()
 	{
 		if (!isset($_POST['action']) || $_POST['action'] !== 'save_instagram_widget') {
