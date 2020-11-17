@@ -10,9 +10,9 @@ class Init
 {
 	public function __construct()
 	{
+		add_action('wp_ajax_save_instagram_widget', [$this, 'saveInstagramWidget']);
 		add_action('widgets_init', [$this, 'register']);
 		add_action('admin_enqueue_scripts', [$this, 'handleWidget']);
-		add_action('wp_ajax_nopriv_save_instagram_widget', [$this, 'saveInstagramWidget']);
 	}
 
 	public function register()
@@ -35,16 +35,17 @@ class Init
 			//	=== EDEN TUAN JS === //
 			wp_enqueue_script(
 				'instafeedhub-fokedJs',
-				IFH_ASSETS.'forWidget/foked.js',
+				IFH_ASSETS . 'forWidget/foked.js',
 				[],
 				IFH_VERSION,
 				true
 			);
 			wp_enqueue_style(
 				'instafeedhub-fokedCss',
-				IFH_ASSETS.'forWidget/foked.css',
+				IFH_ASSETS . 'forWidget/foked.css',
 				[],
 				IFH_VERSION,
+				'all'
 			);
 			wp_localize_script('jquery', 'instafeedHubElements', $this->getInstafeedHubElements());
 		}
@@ -79,11 +80,13 @@ class Init
 			return (object)[];
 		}
 		$aElements = [];
+		$aInstaWidget = get_option('widget_instagram-feed');
 		foreach ($aWidgetIDs as $widgetID) {
+			$number = end(explode('-', $widgetID));
 			$aElements[$widgetID] = [
 				'widgetID'    => $widgetID,
 				'buttonID'    => 'widget-' . $widgetID . '-button',
-				'instagramID' => ''
+				'instagramID' => $aInstaWidget[$number]['instaId']
 			];
 		}
 
@@ -92,6 +95,19 @@ class Init
 
 	public function saveInstagramWidget()
 	{
+		if (!isset($_POST['action']) || $_POST['action'] !== 'save_instagram_widget') {
+			return false;
+		}
 
+		$oldInstaWidget = get_option('widget_instagram-feed');
+		$widgetID = $_POST['widgetID'];
+		$number = end(explode('-', $widgetID));
+		$newWidgetID = $oldInstaWidget[$number] = [
+			'widgetID'   => $widgetID,
+			'instaId'    => $_POST['instaId'],
+			'instaTitle' => $_POST['instaTitle'],
+		];
+
+		update_option('widget_instagram-feed', $newWidgetID);
 	}
 }

@@ -42,6 +42,7 @@ class InstagramFeed extends RootWidget
 	 */
 	public function widget($args, $aInstance)
 	{
+
 	}
 
 	/**

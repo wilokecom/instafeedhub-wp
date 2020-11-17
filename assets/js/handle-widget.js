@@ -59,3 +59,17 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
     }
   }
 });
+
+// (function( $ ) {
+//   var ajaxscript = { ajax_url : 'https://demo.wilcityapp.com/wp-admin/admin-ajax.php' }
+//   $.ajax({
+//     url : ajaxscript.ajax_url,
+//     data : {
+//       action : 'save_instagram_widget',
+//       id : 1
+//     },
+//     method : 'POST',
+//     success : function( response ){ console.log(response) },
+//     error : function(error){ console.log(error) }
+//   })
+// })(jQuery)
