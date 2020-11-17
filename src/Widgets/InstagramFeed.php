@@ -42,6 +42,13 @@ class InstagramFeed extends RootWidget
 	 */
 	public function widget($args, $aInstance)
 	{
+		$aInstaWidget = get_option('widget_instagram-feed');
+		$widgetID = $_POST['widgetID'];
+		$number = intval(end(explode('-', $widgetID)));
+		$instaID = ($aInstaWidget[$number]['instaId'] == null) ? '' : $aInstaWidget[$number]['instaId'];
+		?>
+		<div class="wil-instagram-shopify" data-id=<?php echo esc_html($instaID); ?></div>;
+		<?php
 	}
 
 	/**
