@@ -32,7 +32,7 @@ class Init
 				IFH_VERSION,
 				true
 			);
-			//	=== EDEN TUAN JS === //
+			// === EDEN TUAN JS === //
 			wp_enqueue_script(
 				'instafeedhub-fokedJs',
 				IFH_ASSETS . 'forWidget/foked.js',
@@ -82,7 +82,7 @@ class Init
 		$aElements = [];
 		$aInstaWidget = get_option('widget_instagram-feed');
 		foreach ($aWidgetIDs as $widgetID) {
-			$number = end(explode('-', $widgetID));
+			$number = intval(end(explode('-', $widgetID)));
 			$instaID = ($aInstaWidget[$number]['instaId'] == null) ? '' : $aInstaWidget[$number]['instaId'];
 			$instaTitle = ($aInstaWidget[$number]['instaTitle'] == null) ? '' : $aInstaWidget[$number]['instaTitle'];
 			$aElements[$widgetID] = [
@@ -105,15 +105,16 @@ class Init
 			return false;
 		}
 
-		$oldInstaWidget = get_option('widget_instagram-feed');
+		$aInstaWidget = get_option('widget_instagram-feed');
 		$widgetID = $_POST['widgetID'];
-		$number = end(explode('-', $widgetID));
-		$newWidgetID = $oldInstaWidget[$number] = [
+		$number = intval(end(explode('-', $widgetID)));
+
+		$aInstaWidget[$number] = [
 			'widgetID'   => $widgetID,
 			'instaId'    => $_POST['instaId'],
 			'instaTitle' => $_POST['instaTitle'],
 		];
 
-		update_option('widget_instagram-feed', $newWidgetID);
+		update_option('widget_instagram-feed', $aInstaWidget);
 	}
 }
