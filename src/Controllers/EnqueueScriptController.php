@@ -30,7 +30,7 @@ class EnqueueScriptController
 		}
 
 		$aInstaSettings = Option::getInstaSettingsByPostId(get_the_ID());
-		$aWidgetIDs = Widget::getWidgetIDsByBaseID('instagram-feedhub');
+		$aWidgetIDs = Widget::getWidgetIDsByBaseID();
 		foreach ($aWidgetIDs as $key => $widgetID) {
 			$aInstaSettings[] = Option::getInstaSettingsByWidgetId($widgetID);
 		}

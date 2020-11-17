@@ -6,18 +6,20 @@ namespace InstafeedHub\Helpers;
  * Class Widget
  * @package InstafeedHub\Helpers
  */
-class Widget {
+class Widget
+{
+	private static $baseID = 'instagram-feedhub';
+
 	/**
-	 * @param $baseID
 	 * @return array
 	 */
-	public static function getWidgetIDsByBaseID($baseID)
+	public static function getWidgetIDsByBaseID()
 	{
 		$aSidebarWidget = wp_get_sidebars_widgets();
 		$aWidgetIDs = [];
 		foreach ($aSidebarWidget as $sideBar => $aWidget) {
 			foreach ($aWidget as $key => $widgetID) {
-				if (_get_widget_id_base($widgetID) == $baseID) {
+				if (_get_widget_id_base($widgetID) == self::$baseID) {
 					$aWidgetIDs[] = $widgetID;
 				}
 			}
@@ -33,8 +35,8 @@ class Widget {
 	public static function getInstaIDByWidgetID($widgetID)
 	{
 		$aInstaWidget = get_option('widget_instagram-feed');
-		$number = intval(end(explode('-', $widgetID)));
-		$instaID = ($aInstaWidget[$number]['instaId'] == null) ? '' : $aInstaWidget[$number]['instaId'];
+		$index = intval(end(explode('-', $widgetID)));
+		$instaID = ($aInstaWidget[$index]['instaId'] == null) ? '' : $aInstaWidget[$index]['instaId'];
 
 		return $instaID;
 	}
