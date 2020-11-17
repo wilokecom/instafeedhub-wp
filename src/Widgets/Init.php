@@ -75,7 +75,7 @@ class Init
 	 */
 	public function getInstafeedHubElements()
 	{
-		$aWidgetIDs = $this->getWidgetID('instagram-feed');
+		$aWidgetIDs = $this->getWidgetID('instagram-feedhub');
 		if (empty($aWidgetIDs)) {
 			return (object)[];
 		}

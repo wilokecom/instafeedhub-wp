@@ -6,7 +6,8 @@ namespace InstafeedHub\Helpers;
  * Class Option
  * @package InstafeedHub\Helpers
  */
-class Option {
+class Option
+{
 	private static $optionKey = 'wil_insta_shopify';
 	private static $tokenKey  = 'instafeedhub_tokens';
 
@@ -15,51 +16,58 @@ class Option {
 	 *
 	 * @return mixed|void
 	 */
-	public static function get( $key ) {
-		return get_option( $key );
+	public static function get($key)
+	{
+		return get_option($key);
 	}
 
 	/**
 	 * @param $key
 	 * @param $value
 	 */
-	public static function update( $key, $value ) {
-		update_option( $key, $value );
+	public static function update($key, $value)
+	{
+		update_option($key, $value);
 	}
 
 	/**
 	 * @param $aTokens ['accessToken' => '', 'refreshToken' => '']
 	 */
-	public static function saveTokens( $aTokens ) {
-		update_option( self::$tokenKey, $aTokens );
+	public static function saveTokens($aTokens)
+	{
+		update_option(self::$tokenKey, $aTokens);
 
 		return $aTokens;
 	}
 
-	public static function getTokens( ) {
-		$aTokens = get_option( self::$tokenKey);
-		if ( empty( $aTokens ) ) {
-			return [ 'accessToken' => '', 'refreshToken' => '' ];
+	public static function getTokens()
+	{
+		$aTokens = get_option(self::$tokenKey);
+		if (empty($aTokens)) {
+			return ['accessToken' => '', 'refreshToken' => ''];
 		}
 
 		return $aTokens;
 	}
 
-	public static function updateInstaSettings( $aData ) {
-		self::update( self::$optionKey, $aData );
+	public static function updateInstaSettings($aData)
+	{
+		self::update(self::$optionKey, $aData);
 
 		return $aData;
 	}
 
-	public static function getInstaSettings() {
-		$aData = self::get( self::$optionKey );
+	public static function getInstaSettings()
+	{
+		$aData = self::get(self::$optionKey);
 
-		return empty( $aData ) || ! is_array( $aData ) ? [] : $aData;
+		return empty($aData) || !is_array($aData) ? [] : $aData;
 	}
 
-	public static function getInstaSettingsByPostId( $postId ) {
-		$aInstaIds = get_post_meta( get_the_ID(), 'instafeedhub_ids', true );
-		if ( empty( $aInstaIds ) ) {
+	public static function getInstaSettingsByPostId($postId)
+	{
+		$aInstaIds = get_post_meta(get_the_ID(), 'instafeedhub_ids', true);
+		if (empty($aInstaIds)) {
 			return apply_filters(
 				'instafeedhub/filter/src/Helpers/Option/getInstaSettingsByPostId/my-insta-settings',
 				[]
@@ -68,7 +76,7 @@ class Option {
 
 		$aData = self::getInstaSettings();
 
-		if ( empty( $aData ) ) {
+		if (empty($aData)) {
 			return apply_filters(
 				'instafeedhub/filter/src/Helpers/Option/getInstaSettingsByPostId/my-insta-settings',
 				[]
@@ -76,10 +84,10 @@ class Option {
 		}
 
 		$aInstaSettings = [];
-		foreach ( $aInstaIds as $instaId ) {
-			if ( isset( $aData[ $instaId ] ) ) {
-				foreach ( $aData[ $instaId ] as $key => $val ) {
-					$aInstaSettings[ $postId ][ $key ] = InstaSettingValueFormat::correctValueType( $val, $key );
+		foreach ($aInstaIds as $instaId) {
+			if (isset($aData[$instaId])) {
+				foreach ($aData[$instaId] as $key => $val) {
+					$aInstaSettings[$postId][$key] = InstaSettingValueFormat::correctValueType($val, $key);
 				}
 			}
 		}
@@ -88,5 +96,25 @@ class Option {
 			'instafeedhub/filter/src/Helpers/Option/getInstaSettingsByPostId/my-insta-settings',
 			$aInstaSettings
 		);
+	}
+
+	/**
+	 * @param $widgetID
+	 * @return array
+	 */
+	public static function getInstaSettingsByWidgetID($widgetID)
+	{
+		$aInstaWidget = get_option('widget_instagram-feed');
+		$number = intval(end(explode('-', $widgetID)));
+		$instaID = intval(($aInstaWidget[$number]['instaId'] == null) ? '' : $aInstaWidget[$number]['instaId']);
+		$aData = self::getInstaSettings();
+		$aInstaSettings = [];
+		if (isset($aData[$instaID])) {
+			foreach ($aData[$instaID] as $key => $val) {
+				$aInstaSettings[$widgetID][$key] = InstaSettingValueFormat::correctValueType($val, $key);
+			}
+		}
+
+		return $aInstaSettings[$widgetID];
 	}
 }

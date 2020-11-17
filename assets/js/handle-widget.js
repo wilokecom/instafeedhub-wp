@@ -1,7 +1,7 @@
 jQuery(document).ajaxComplete(function (event, xhr, settings) {
   let data = settings.data;
   let param = new URLSearchParams(data);
-  if (param.get('action') === 'save-widget' && param.get('id_base') === 'instagram-feed') {
+  if (param.get('action') === 'save-widget' && param.get('id_base') === 'instagram-feedhub') {
     //Add
     if (param.get('add_new') === 'multi') {
       const newId = param.get('widget-id');

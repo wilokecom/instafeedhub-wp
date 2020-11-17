@@ -25,4 +25,17 @@ class Widget {
 
 		return $aWidgetIDs;
 	}
+
+	/**
+	 * @param $widgetID
+	 * @return string
+	 */
+	public static function getInstaIDByWidgetID($widgetID)
+	{
+		$aInstaWidget = get_option('widget_instagram-feed');
+		$number = intval(end(explode('-', $widgetID)));
+		$instaID = ($aInstaWidget[$number]['instaId'] == null) ? '' : $aInstaWidget[$number]['instaId'];
+
+		return $instaID;
+	}
 }
