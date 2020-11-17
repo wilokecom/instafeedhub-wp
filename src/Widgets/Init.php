@@ -84,9 +84,10 @@ class Init
 		foreach ($aWidgetIDs as $widgetID) {
 			$number = end(explode('-', $widgetID));
 			$aElements[$widgetID] = [
-				'widgetID'    => $widgetID,
-				'buttonID'    => 'widget-' . $widgetID . '-button',
-				'instagramID' => $aInstaWidget[$number]['instaId']
+				'widgetID'       => $widgetID,
+				'buttonID'       => 'widget-' . $widgetID . '-button',
+				'instagramID'    => $aInstaWidget[$number]['instaId'],
+				'instagramTitle' => $aInstaWidget[$number]['instaTitle'],
 			];
 		}
 
