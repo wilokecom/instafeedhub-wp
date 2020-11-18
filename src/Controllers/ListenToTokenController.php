@@ -62,9 +62,6 @@ class ListenToTokenController {
 		}
 
 		$aTokens = Option::getTokens();
-//		if ( isset( $_GET['post'] ) ) {
-//			$aArgs['id'] = abs( $_GET['post'] );
-//		}
 
 		$aData = [
 			'accessToken'    => $aTokens['accessToken'],
