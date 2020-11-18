@@ -5,8 +5,8 @@
 function instagramFeedhub($atts)
 {
 	?>
-    <div id="<?php ?>"><?php echo __('Instagram Feedhub', 'instafeedhub-wp'); ?></div>
+    <div id="vc-instagram-feedhub"><?php echo __('Instagram Feedhub', 'instafeedhub-wp'); ?></div>
 	<?php
 }
 
-add_shortcode('instagram-feedhub', 'instagramFeedhub');
+add_shortcode('vc-instagram-feedhub', 'instagramFeedhub');
