@@ -1,6 +1,6 @@
 <?php
 
-namespace InstafeedHub\Elementors;
+namespace InstafeedHub\Elementor;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;

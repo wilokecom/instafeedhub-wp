@@ -1,6 +1,6 @@
 <?php
 
-namespace InstafeedHub\Elementors;
+namespace InstafeedHub\Elementor;
 
 /**
  * Class ElementorInit
