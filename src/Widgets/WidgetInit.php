@@ -19,7 +19,7 @@ class WidgetInit
 
 	public function register()
 	{
-		register_widget('InstafeedHub\Widgets\InstagramFeed');
+		register_widget('InstafeedHub\Widgets\InstagramFeedhub');
 	}
 
 	public function handleWidget()
