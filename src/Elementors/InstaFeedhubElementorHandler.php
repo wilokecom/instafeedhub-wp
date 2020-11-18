@@ -46,9 +46,7 @@ class InstaFeedhubElementorHandler
 		foreach ($aData as $sectionKey => $sectionItem) {
 			$aElements = $sectionItem->elements;
 			foreach ($aElements as $item) {
-
 				$aWidget = $item->elements;
-
 				foreach ($aWidget as $widgetItem) {
 					if ($widgetItem->widgetType == 'instagram-feedhub') {
 						$aInstaElements[$widgetItem->id] = [
