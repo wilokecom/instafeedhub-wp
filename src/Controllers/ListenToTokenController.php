@@ -55,14 +55,13 @@ class ListenToTokenController {
 			return false;
 		}
 
-		if ( ! isset( $_GET['post_type'] ) && ! isset( $_GET['post'] ) ) {
+		global $pagenow;
+
+		if (!isset($_GET['post_type']) && !isset($_GET['post']) && $pagenow !== 'widgets.php') {
 			return false;
 		}
 
 		$aTokens = Option::getTokens();
-		if ( isset( $_GET['post'] ) ) {
-			$aArgs['id'] = abs( $_GET['post'] );
-		}
 
 		$aData = [
 			'accessToken'    => $aTokens['accessToken'],
