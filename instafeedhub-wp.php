@@ -35,7 +35,7 @@ use InstafeedHub\Controllers\AdminController;
 use InstafeedHub\Controllers\EnqueueScriptController;
 use InstafeedHub\Controllers\ListenToTokenController;
 use InstafeedHub\Controllers\RemoteDataController;
-use InstafeedHub\Widgets\WidgetInit;
+use InstafeedHub\Widget\WidgetInit;
 new RemoteDataController();
 new ListenToTokenController();
 new EnqueueScriptController();

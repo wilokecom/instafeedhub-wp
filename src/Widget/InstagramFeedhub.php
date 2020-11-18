@@ -1,6 +1,6 @@
 <?php
 
-namespace InstafeedHub\Widgets;
+namespace InstafeedHub\Widget;
 
 use InstafeedHub\Helpers\Widget;
 /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace InstafeedHub\Widgets;
+namespace InstafeedHub\Widget;
 
 use InstafeedHub\Helpers\Widget;
 
@@ -19,7 +19,7 @@ class WidgetInit
 
 	public function register()
 	{
-		register_widget('InstafeedHub\Widgets\InstagramFeedhub');
+		register_widget('InstafeedHub\Widget\InstagramFeedhub');
 	}
 
 	public function handleWidget()
