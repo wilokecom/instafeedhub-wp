@@ -4,10 +4,10 @@ namespace InstafeedHub\Widgets;
 
 use InstafeedHub\Helpers\Widget;
 /**
- * Class InstagramFeed
+ * Class InstagramFeedhub
  * @package InstafeedHub\Widgets
  */
-class InstagramFeed extends RootWidget
+class InstagramFeedhub extends RootWidget
 {
 	/**
 	 * @var string
@@ -27,7 +27,7 @@ class InstagramFeed extends RootWidget
 		];
 
 	/**
-	 * InstagramFeed constructor.
+	 * InstagramFeedhub constructor.
 	 */
 	public function __construct()
 	{
