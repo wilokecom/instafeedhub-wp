@@ -104,7 +104,7 @@ class Option
 	 */
 	public static function getInstaSettingsByWidgetID($widgetID)
 	{
-		$aInstaWidget = get_option('widget_instagram-feed');
+		$aInstaWidget = get_option('widget-insta-feedhub');
 		$number = intval(end(explode('-', $widgetID)));
 		$instaID = intval(($aInstaWidget[$number]['instaId'] == null) ? '' : $aInstaWidget[$number]['instaId']);
 		$aData = self::getInstaSettings();

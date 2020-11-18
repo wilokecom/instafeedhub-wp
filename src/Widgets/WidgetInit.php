@@ -63,7 +63,7 @@ class WidgetInit
 			return (object)[];
 		}
 		$aElements = [];
-		$aInstaWidget = get_option('widget_instagram-feed');
+		$aInstaWidget = get_option('widget-insta-feedhub');
 		foreach ($aWidgetIDs as $widgetID) {
 			$index = intval(end(explode('-', $widgetID)));
 			$instaID = ($aInstaWidget[$index]['instaId'] == null) ? '' : $aInstaWidget[$index]['instaId'];
@@ -88,7 +88,7 @@ class WidgetInit
 			return false;
 		}
 
-		$aInstaWidget = get_option('widget_instagram-feed');
+		$aInstaWidget = get_option('widget-insta-feedhub');
 		$widgetID = $_POST['widgetID'];
 		$index = intval(end(explode('-', $widgetID)));
 
@@ -98,6 +98,6 @@ class WidgetInit
 			'instaTitle' => $_POST['instaTitle'],
 		];
 
-		update_option('widget_instagram-feed', $aInstaWidget);
+		update_option('widget-insta-feedhub', $aInstaWidget);
 	}
 }
