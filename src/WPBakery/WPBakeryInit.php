@@ -31,8 +31,7 @@ class WPBakeryInit
 		$this->aConfiguration = [
 			[
 				'name'     => esc_html__('InstaFeedhub', 'instafeedhub-wp'),
-				'base'     => 'instagram-feedhub',
-				'category' => esc_html__('', 'instafeedhub-wp'),
+				'base'     => 'vc-instagram-feedhub',
 				'icon'     => 'dgt-show_text',
 				"params"   => [
 				]
