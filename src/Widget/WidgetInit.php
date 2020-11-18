@@ -6,7 +6,7 @@ use InstafeedHub\Helpers\Widget;
 
 /**
  * Class WidgetInit
- * @package InstafeedHub\Widgets
+ * @package InstafeedHub\Widget
  */
 class WidgetInit
 {

@@ -7,7 +7,7 @@ use Elementor\Controls_Manager;
 
 /**
  * Class InstagramFeedhub
- * @package InstafeedHub\Elementors
+ * @package InstafeedHub\Elementor
  */
 class InstagramFeedhub extends Widget_Base
 {

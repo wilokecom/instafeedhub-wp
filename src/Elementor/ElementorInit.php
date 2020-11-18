@@ -4,7 +4,7 @@ namespace InstafeedHub\Elementors;
 
 /**
  * Class ElementorInit
- * @package InstafeedHub\Elementors
+ * @package InstafeedHub\Elementor
  */
 class ElementorInit
 {

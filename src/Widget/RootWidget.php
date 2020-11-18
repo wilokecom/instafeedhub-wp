@@ -4,7 +4,7 @@ namespace InstafeedHub\Widgets;
 
 /**
  * Class RootWidget
- * @package InstafeedHub\Widgets
+ * @package InstafeedHub\Widget
  */
 class RootWidget extends \WP_Widget
 {
