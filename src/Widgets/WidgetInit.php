@@ -5,10 +5,10 @@ namespace InstafeedHub\Widgets;
 use InstafeedHub\Helpers\Widget;
 
 /**
- * Class Init
+ * Class WidgetInit
  * @package InstafeedHub\Widgets
  */
-class Init
+class WidgetInit
 {
 	public function __construct()
 	{
