@@ -5,7 +5,7 @@ namespace InstafeedHub\Widgets;
 use InstafeedHub\Helpers\Widget;
 /**
  * Class InstagramFeedhub
- * @package InstafeedHub\Widgets
+ * @package InstafeedHub\Widget
  */
 class InstagramFeedhub extends RootWidget
 {
