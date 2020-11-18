@@ -28,8 +28,40 @@ class InstaFeedhubElementorHandler
 		wp_localize_script('jquery', 'instafeedHubElements', $this->getInstafeedHubElements());
 	}
 
+	/**
+	 * @return array|bool
+	 */
 	public function getInstafeedHubElements()
 	{
-		return 'aaaa';
+		if (!isset($_GET['action']) || $_GET['action'] !== 'elementor') {
+			return false;
+		}
+
+		global $post;
+		$postID = $post->ID;
+		$aData = get_post_meta($postID, '_elementor_data', true);
+		$aData = json_decode($aData, false);
+
+		$aInstaElements = [];
+		foreach ($aData as $sectionKey => $sectionItem) {
+			$aElements = $sectionItem->elements;
+			foreach ($aElements as $item) {
+
+				$aWidget = $item->elements;
+
+				foreach ($aWidget as $widgetItem) {
+					if ($widgetItem->widgetType == 'instagram-feedhub') {
+						$aInstaElements[$widgetItem->id] = [
+							'widgetID'       => $widgetItem->id,
+							'buttonID'       => 'instagram-feedhub-' . $widgetItem->id,
+							'instagramID'    => '',
+							'instagramTitle' => ''
+						];
+					}
+				}
+			}
+		}
+
+		return $aInstaElements;
 	}
 }
