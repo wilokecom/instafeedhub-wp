@@ -59,7 +59,7 @@ class ElementorInit
 		$oElementsManager->add_category(
 			'instagram-feedhub',
 			array(
-				'title' => __('Instagram FeedHub', 'instafeedhub-wp'),
+				'title' => __('InstaFeedHub', 'instafeedhub-wp'),
 				'icon'  => 'fa fa-plug',
 			)
 		);
