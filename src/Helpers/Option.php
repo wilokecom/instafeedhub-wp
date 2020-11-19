@@ -105,8 +105,9 @@ class Option
 	public static function getInstaSettingsByWidgetID($widgetID)
 	{
 		$aInstaWidget = get_option('widget_instagram-feed');
-		$number = intval(end(explode('-', $widgetID)));
-		$instaID = intval(($aInstaWidget[$number]['instaId'] == null) ? '' : $aInstaWidget[$number]['instaId']);
+		$element = explode('-', $widgetID);
+		$index = intval(end($element));
+		$instaID = intval(($aInstaWidget[$index]['instaId'] == null) ? '' : $aInstaWidget[$index]['instaId']);
 		$aData = self::getInstaSettings();
 		$aInstaSettings = [];
 		if (isset($aData[$instaID])) {
