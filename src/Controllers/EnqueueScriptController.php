@@ -34,7 +34,7 @@ class EnqueueScriptController
 		$aWidgetIDs = Widget::getWidgetIDsByBaseID();
 		foreach ($aWidgetIDs as $key => $widgetID) {
 			if (!empty(Option::getInstaSettingsByWidgetId($widgetID))) {
-				$aInstaSettings[] = Option::getInstaSettingsByWidgetId($widgetID));
+				$aInstaSettings[] = Option::getInstaSettingsByWidgetId($widgetID);
 			}
 		}
 		if (empty($aInstaSettings)) {
