@@ -65,7 +65,8 @@ class WidgetInit
 		$aElements = [];
 		$aInstaWidget = get_option('widget-insta-feedhub');
 		foreach ($aWidgetIDs as $widgetID) {
-			$index = intval(end(explode('-', $widgetID)));
+			$element = explode('-', $widgetID);
+			$index = intval(end($element));
 			$instaID = ($aInstaWidget[$index]['instaId'] == null) ? '' : $aInstaWidget[$index]['instaId'];
 			$instaTitle = ($aInstaWidget[$index]['instaTitle'] == null) ? '' : $aInstaWidget[$index]['instaTitle'];
 			$aElements[$widgetID] = [
@@ -90,7 +91,8 @@ class WidgetInit
 
 		$aInstaWidget = get_option('widget-insta-feedhub');
 		$widgetID = $_POST['widgetID'];
-		$index = intval(end(explode('-', $widgetID)));
+		$element = explode('-', $widgetID);
+		$index = intval(end($element));
 
 		$aInstaWidget[$index] = [
 			'widgetID'   => $widgetID,
