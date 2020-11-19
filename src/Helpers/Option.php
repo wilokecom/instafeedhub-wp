@@ -105,7 +105,8 @@ class Option
 	public static function getInstaSettingsByWidgetID($widgetID)
 	{
 		$aInstaWidget = get_option('widget-insta-feedhub');
-		$number = intval(end(explode('-', $widgetID)));
+		$element = explode('-', $widgetID);
+		$number = intval(end($element));
 		$instaID = intval(($aInstaWidget[$number]['instaId'] == null) ? '' : $aInstaWidget[$number]['instaId']);
 		$aData = self::getInstaSettings();
 		$aInstaSettings = [];
@@ -113,6 +114,9 @@ class Option
 			foreach ($aData[$instaID] as $key => $val) {
 				$aInstaSettings[$widgetID][$key] = InstaSettingValueFormat::correctValueType($val, $key);
 			}
+		}
+		if(!isset($aInstaSettings[$widgetID])){
+			return [];
 		}
 
 		return $aInstaSettings[$widgetID];
