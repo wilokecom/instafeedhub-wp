@@ -100,19 +100,24 @@ class Option
 
 	/**
 	 * @param $widgetID
-	 * @return array
+	 * @return bool|mixed
 	 */
 	public static function getInstaSettingsByWidgetID($widgetID)
 	{
 		$aInstaWidget = get_option('widget-insta-feedhub');
-		$number = intval(end(explode('-', $widgetID)));
-		$instaID = intval(($aInstaWidget[$number]['instaId'] == null) ? '' : $aInstaWidget[$number]['instaId']);
+		$element = explode('-', $widgetID);
+		$index = intval(end($element));
+		$instaID = intval(($aInstaWidget[$index]['instaId'] == null) ? '' : $aInstaWidget[$index]['instaId']);
 		$aData = self::getInstaSettings();
 		$aInstaSettings = [];
 		if (isset($aData[$instaID])) {
 			foreach ($aData[$instaID] as $key => $val) {
 				$aInstaSettings[$widgetID][$key] = InstaSettingValueFormat::correctValueType($val, $key);
 			}
+		}
+
+		if (!isset($aInstaSettings[$widgetID])) {
+			return false;
 		}
 
 		return $aInstaSettings[$widgetID];
