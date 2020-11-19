@@ -91,7 +91,8 @@ class WidgetInit
 
 		$aInstaWidget = get_option('widget-insta-feedhub');
 		$widgetID = $_POST['widgetID'];
-		$index = intval(end(explode('-', $widgetID)));
+		$element = explode('-', $widgetID);
+		$index = intval(end($element));
 
 		$aInstaWidget[$index] = [
 			'widgetID'   => $widgetID,
