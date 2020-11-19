@@ -93,7 +93,6 @@ class WidgetInit
 		$widgetID = $_POST['widgetID'];
 		$element = explode('-', $widgetID);
 		$index = intval(end($element));
-
 		$aInstaWidget[$index] = [
 			'widgetID'   => $widgetID,
 			'instaId'    => $_POST['instaId'],
