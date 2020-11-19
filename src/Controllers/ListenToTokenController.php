@@ -14,7 +14,7 @@ class ListenToTokenController
 	public function __construct()
 	{
 		add_action('admin_enqueue_scripts', [$this, 'adminScripts']);
-		add_action('elementor/editor/before_enqueue_scripts', [$this, 'adminScripts']);
+		add_action('elementor/editor/before_enqueue_scripts',[$this, 'adminScripts']);
 		add_action('wp_ajax_instafeedhub_save_tokens', [$this, 'saveInstafeedHubTokens']);
 		add_action('wp_ajax_instafeedhub_get_access_tokens', [$this, 'getAccessToken']);
 	}

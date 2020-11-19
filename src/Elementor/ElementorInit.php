@@ -64,4 +64,10 @@ class ElementorInit
 			)
 		);
 	}
+
+	protected function _content_template() {
+		?>
+		<button>Test</button>
+		<?php
+	}
 }
