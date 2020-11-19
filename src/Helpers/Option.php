@@ -100,7 +100,7 @@ class Option
 
 	/**
 	 * @param $widgetID
-	 * @return array
+	 * @return bool|mixed
 	 */
 	public static function getInstaSettingsByWidgetID($widgetID)
 	{
@@ -116,7 +116,7 @@ class Option
 			}
 		}
 		if(!isset($aInstaSettings[$widgetID])){
-			return [];
+			return false;
 		}
 
 		return $aInstaSettings[$widgetID];
