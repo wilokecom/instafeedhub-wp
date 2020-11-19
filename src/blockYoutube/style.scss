@@ -1,0 +1,34 @@
+/**
+ * #.# Styles
+ *
+ * CSS for both Frontend+Backend.
+ */
+
+.gcb-WilYoutubePlaylist {
+    padding: 2rem;
+    border: 1px solid rgba($color: #000000, $alpha: 0.6);
+    border-radius: 8px;
+}
+
+.gcb-WilYoutubePlaylist__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.gcb-WilYoutubePlaylist__header h1.gcb-WilYoutubePlaylist__heading {
+    margin: 0;
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+.gcb-WilYoutubePlaylist__input {
+    margin-top: 20px;
+}
+
+.gcb-WilYoutubePlaylist__i {
+    font-size: 13px;
+    display: block;
+    line-height: 1.4;
+}
