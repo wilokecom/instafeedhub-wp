@@ -10,6 +10,10 @@ namespace InstafeedHub\WPBakery;
 class WPBakeryInit
 {
 	/**
+	 * @var int
+	 */
+	public static $instaFeedId = 1;
+	/**
 	 * @var
 	 */
 	private $aConfiguration;
@@ -26,7 +30,7 @@ class WPBakeryInit
 	{
 		add_action('vc_before_init', array($this, 'register'));
 		add_action('admin_enqueue_scripts', [$this, 'enqueueScripts']);
-//		add_action('save_post', [$this, 'saveInstaSetting'], 10, 2);
+//		add_action('admin_enqueue_scripts', [$this, 'enqueueScripts']);
 	}
 
 	/**
@@ -41,18 +45,15 @@ class WPBakeryInit
 			'params' => [
 				[
 					'type'       => 'textfield',
-					'heading'    => 'Heading',
-					'param_name' => 'heading'
+					'heading'    => __('Select InstaFeedHub', 'instafeedhub-wp'),
+					'param_name' => 'vc-instagram-feedhub-' . self::$instaFeedId,
 				],
-			]
+			],
 		];
 
 		foreach ($this->aConfiguration as $sc) {
 			vc_map($sc);
 			$this->addShortCode($sc);
-			vc_add_param($sc,[
-				'el_id'=>123
-			]);
 		}
 	}
 
@@ -112,7 +113,6 @@ class WPBakeryInit
 				foreach ($aMatches[0] as $widgetID) {
 					$aElement[$widgetID] = [
 						'widgetID' => $widgetID,
-						'buttonID' => $widgetID
 					];
 				}
 			}
@@ -121,8 +121,13 @@ class WPBakeryInit
 		return $aElement;
 	}
 
-	public function saveInstaSetting($postID, $post)
-	{
+//	/**
+//	 * @param $postID
+//	 * @param $post
+//	 * @return bool
+//	 */
+//	public function saveInstaSetting($postID, $post)
+//	{
 //		if (!current_user_can('edit_posts')) {
 //			return false;
 //		}
@@ -133,5 +138,5 @@ class WPBakeryInit
 //				update_post_meta($postId, 'instafeedhub_ids', $aMatches[1]);
 //			}
 //		}
-	}
+//	}
 }
