@@ -46,7 +46,7 @@ class WPBakeryInit
 				[
 					'type'       => 'textfield',
 					'heading'    => __('Select InstaFeedHub', 'instafeedhub-wp'),
-					'param_name' => 'vc-instagram-feedhub-' . self::$instaFeedId,
+					'param_name' => 'vc-instagram-feedhub-input',
 				],
 			],
 		];
@@ -89,6 +89,21 @@ class WPBakeryInit
 			[],
 			IFH_VERSION,
 			true
+		);
+		// ===
+		wp_enqueue_script(
+			'handle-wp-bakeryFokedJs',
+			IFH_ASSETS . 'forBakery/foked.js',
+			[],
+			IFH_VERSION,
+			true
+		);
+		wp_enqueue_style(
+			'handle-wp-bakeryFokedCss',
+			IFH_ASSETS . 'forBakery/foked.css',
+			[],
+			IFH_VERSION,
+			'all'
 		);
 
 		wp_localize_script('jquery', 'instafeedHubElements', $this->getInstafeedHubElements());
