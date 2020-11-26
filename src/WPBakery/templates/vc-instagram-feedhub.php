@@ -1,8 +1,7 @@
 <?php
-
 /**
  * @param $atts
- * @return string
+ * @return false|string
  */
 function instagramFeedhub($atts)
 {

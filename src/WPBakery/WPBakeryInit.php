@@ -1,6 +1,5 @@
 <?php
 
-
 namespace InstafeedHub\WPBakery;
 
 /**
@@ -9,10 +8,6 @@ namespace InstafeedHub\WPBakery;
  */
 class WPBakeryInit
 {
-	/**
-	 * @var int
-	 */
-	public static $instaFeedId = 1;
 	/**
 	 * @var
 	 */
@@ -39,8 +34,8 @@ class WPBakeryInit
 	{
 		$this->aConfiguration[] = [
 			'name'   => esc_html__('InstaFeedhub', 'instafeedhub-wp'),
-			'base'   => 'vc-instagram-feedhub',
-			'icon'   => 'dgt-show_text',
+			'base'   => $this->shortCode,
+			'icon'   => '',
 			'params' => [
 				[
 					'type'       => 'textfield',
