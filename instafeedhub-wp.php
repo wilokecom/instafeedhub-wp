@@ -17,12 +17,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! defined( 'IFH_URL' ) ) {
-	define( 'IFH_URL', 'https://instafeedhub.com/' );
-	define( 'IFH_NAMESPACE', 'wiloke/v1/instafeedhub' );
-	define( 'IFH_VERSION', 0.1 );
-	define( 'IFH_PREFIX', 'instafeedhub_' );
-	define( 'IFH_ASSETS', plugin_dir_url( __FILE__) . 'assets/' );
+if (!defined('IFH_URL')) {
+	define('IFH_URL', 'https://instafeedhub.com/');
+	define('IFH_NAMESPACE', 'wiloke/v1/instafeedhub');
+	define('IFH_VERSION', 0.1);
+	define('IFH_PREFIX', 'instafeedhub_');
+	define('IFH_DIR', plugin_dir_path(__FILE__));
+	define('IFH_ASSETS', plugin_dir_url(__FILE__) . 'assets/');
 }
 
 require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
@@ -36,10 +37,13 @@ use InstafeedHub\Controllers\EnqueueScriptController;
 use InstafeedHub\Controllers\ListenToTokenController;
 use InstafeedHub\Controllers\RemoteDataController;
 use InstafeedHub\Widget\WidgetInit;
+use InstafeedHub\KC\KCInit;
+
 new RemoteDataController();
 new ListenToTokenController();
 new EnqueueScriptController();
 new AdminController();
 new WidgetInit();
+new KCInit();
 
 
