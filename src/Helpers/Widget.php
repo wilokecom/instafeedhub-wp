@@ -37,7 +37,12 @@ class Widget
 		$aInstaWidget = get_option('widget-insta-feedhub');
 		$element = explode('-', $widgetID);
 		$index = intval(end($element));
-		$instaID = ($aInstaWidget[$index]['instaId'] == null) ? '' : $aInstaWidget[$index]['instaId'];
+		$instaID = '';
+		if (isset($aInstaWidget[$index])) {
+			if ($aInstaWidget[$index]['instaId'] !== null) {
+				$instaID = intval($aInstaWidget[$index]['instaId']);
+			}
+		}
 
 		return $instaID;
 	}

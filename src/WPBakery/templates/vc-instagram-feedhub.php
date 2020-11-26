@@ -1,15 +1,18 @@
 <?php
-use \InstafeedHub\WPBakery\WPBakeryInit;
+
 /**
  * @param $atts
  * @return string
  */
 function instagramFeedhub($atts)
 {
-	?>
-    <div id="vc-instagram-feedhub-<?php echo WPBakeryInit::$instaFeedId; ?>"><?php echo __('Instagram Feedhub', 'instafeedhub-wp'); ?></div>
+	ob_start(); ?>
+    <div class="wil-instagram-shopify" data-id="<?php echo esc_html($atts['vc-instagram-feedhub-input']); ?>"></div>
 	<?php
-	WPBakeryInit::$instaFeedId++;
+	$content = ob_get_contents();
+	ob_end_clean();
+
+	return $content;
 }
 
 add_shortcode('vc-instagram-feedhub', 'instagramFeedhub');

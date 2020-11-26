@@ -30,7 +30,6 @@ class WPBakeryInit
 	{
 		add_action('vc_before_init', array($this, 'register'));
 		add_action('admin_enqueue_scripts', [$this, 'enqueueScripts']);
-//		add_action('admin_enqueue_scripts', [$this, 'enqueueScripts']);
 	}
 
 	/**
@@ -135,23 +134,4 @@ class WPBakeryInit
 
 		return $aElement;
 	}
-
-//	/**
-//	 * @param $postID
-//	 * @param $post
-//	 * @return bool
-//	 */
-//	public function saveInstaSetting($postID, $post)
-//	{
-//		if (!current_user_can('edit_posts')) {
-//			return false;
-//		}
-//		var_export($post->post_content);
-//		die;
-//		if (preg_match_all('/"instaId":([\d]+)/', $post->post_content, $aMatches)) {
-//			if (isset($aMatches[1])) {
-//				update_post_meta($postId, 'instafeedhub_ids', $aMatches[1]);
-//			}
-//		}
-//	}
 }

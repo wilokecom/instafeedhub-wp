@@ -107,7 +107,13 @@ class Option
 		$aInstaWidget = get_option('widget-insta-feedhub');
 		$element = explode('-', $widgetID);
 		$index = intval(end($element));
-		$instaID = intval(($aInstaWidget[$index]['instaId'] == null) ? '' : $aInstaWidget[$index]['instaId']);
+		$instaID = '';
+		if (isset($aInstaWidget[$index])) {
+			if ($aInstaWidget[$index]['instaId'] !== null) {
+				$instaID = intval($aInstaWidget[$index]['instaId']);
+			}
+		}
+//		$instaID = intval(($aInstaWidget[$index]['instaId'] == null) ? '' : $aInstaWidget[$index]['instaId']);
 		$aData = self::getInstaSettings();
 		$aInstaSettings = [];
 		if (isset($aData[$instaID])) {
