@@ -23,6 +23,21 @@ class InstaFeedhubElementorHandler
 				IFH_VERSION,
 				true
 			);
+			// === EDEN TUAN JS === //
+			wp_enqueue_script(
+				'instafeedhubElementor-fokedJs',
+				IFH_ASSETS . 'forElementor/foked.js',
+				[],
+				IFH_VERSION,
+				true
+			);
+			wp_enqueue_style(
+				'instafeedhubElementor-fokedCss',
+				IFH_ASSETS . 'forElementor/foked.css',
+				[],
+				IFH_VERSION,
+				'all'
+			);
 		}
 	}
 }
