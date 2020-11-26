@@ -28,10 +28,13 @@ class WPBakeryInit
 	}
 
 	/**
-	 * @throws \Exception
+	 * @return mixed
 	 */
-	public function register()
+	public function getConfiguration()
 	{
+		if (!empty($this->aConfiguration)) {
+			return $this->aConfiguration;
+		}
 		$this->aConfiguration[] = [
 			'name'   => esc_html__('InstaFeedhub', 'instafeedhub-wp'),
 			'base'   => $this->shortCode,
@@ -44,6 +47,16 @@ class WPBakeryInit
 				],
 			],
 		];
+
+		return $this->aConfiguration;
+	}
+
+	/**
+	 * @throws \Exception
+	 */
+	public function register()
+	{
+		$this->getConfiguration();
 
 		foreach ($this->aConfiguration as $sc) {
 			vc_map($sc);
