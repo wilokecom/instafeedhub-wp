@@ -99,34 +99,5 @@ class WPBakeryInit
 			IFH_VERSION,
 			'all'
 		);
-
-		wp_localize_script('jquery', 'instafeedHubElements', $this->getInstafeedHubElements());
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getInstafeedHubElements()
-	{
-		$content = get_the_content();
-		if (!has_shortcode($content, $this->shortCode)) {
-			return [];
-		}
-
-		ob_start();
-		do_shortcode($content, true);
-		$rawContent = ob_get_clean();
-		$aElement = [];
-		if (preg_match_all('/vc-instagram-feedhub-\S/', $rawContent, $aMatches)) {
-			if (!empty($aMatches[0])) {
-				foreach ($aMatches[0] as $widgetID) {
-					$aElement[$widgetID] = [
-						'widgetID' => $widgetID,
-					];
-				}
-			}
-		}
-
-		return $aElement;
 	}
 }
