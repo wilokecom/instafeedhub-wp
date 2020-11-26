@@ -37,7 +37,9 @@ function init() {
   // === revice to reactjs
   window.addEventListener('message', event => {
     if (event.data.type && event.data.type.includes('FE_INSTA_BACKERY_DATA')) {
+      console.log(11, { input, event });
       input.setAttribute('value', event.data.payload.id);
+      input.value = event.data.payload.id;
     }
   });
 }
