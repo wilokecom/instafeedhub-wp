@@ -36,10 +36,15 @@ use InstafeedHub\Controllers\EnqueueScriptController;
 use InstafeedHub\Controllers\ListenToTokenController;
 use InstafeedHub\Controllers\RemoteDataController;
 use InstafeedHub\Widget\WidgetInit;
+use InstafeedHub\Elementor\ElementorInit;
+use InstafeedHub\Elementor\InstaFeedhubElementorHandler;
+
 new RemoteDataController();
 new ListenToTokenController();
 new EnqueueScriptController();
 new AdminController();
 new WidgetInit();
+new ElementorInit();
+new InstaFeedhubElementorHandler();
 
 
