@@ -67,7 +67,12 @@ class WidgetInit
 		foreach ($aWidgetIDs as $widgetID) {
 			$element = explode('-', $widgetID);
 			$index = intval(end($element));
-			$instaID = ($aInstaWidget[$index]['instaId'] == null) ? '' : $aInstaWidget[$index]['instaId'];
+			$instaID = '';
+			if (isset($aInstaWidget[$index])) {
+				if ($aInstaWidget[$index]['instaId'] !== null) {
+					$instaID = intval($aInstaWidget[$index]['instaId']);
+				}
+			}
 			$instaTitle = ($aInstaWidget[$index]['instaTitle'] == null) ? '' : $aInstaWidget[$index]['instaTitle'];
 			$aElements[$widgetID] = [
 				'widgetID'       => $widgetID,
