@@ -87,7 +87,7 @@ class Option
 		foreach ($aInstaIds as $instaId) {
 			if (isset($aData[$instaId])) {
 				foreach ($aData[$instaId] as $key => $val) {
-					$aInstaSettings[$postId][$key] = InstaSettingValueFormat::correctValueType($val, $key);
+					$aInstaSettings[$instaId][$key] = InstaSettingValueFormat::correctValueType($val, $key);
 				}
 			}
 		}
@@ -113,6 +113,7 @@ class Option
 				$instaID = intval($aInstaWidget[$index]['instaId']);
 			}
 		}
+
 		$aData = self::getInstaSettings();
 		$aInstaSettings = [];
 		if (isset($aData[$instaID])) {
