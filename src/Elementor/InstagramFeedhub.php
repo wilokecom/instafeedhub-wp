@@ -59,7 +59,7 @@ class InstagramFeedhub extends Widget_Base
 			'instafeedhub_input',
 			[
 				'classes' => 'instafeedhub_input',
-				'label'   => esc_html__('InstaFeedHub', 'instafeedhub-wp'),
+				'label'   => esc_html__('Instagram ID', 'instafeedhub-wp'),
 				'type'    => Controls_Manager::TEXT,
 			]
 		);
