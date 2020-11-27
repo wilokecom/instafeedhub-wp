@@ -10,14 +10,12 @@ class InstaFeedhubElementorHandler
 {
 	public function __construct()
 	{
-		add_action('elementor/editor/after_enqueue_scripts', [$this, 'enqueueScripts']); 
+		add_action('elementor/editor/after_enqueue_scripts', [$this, 'enqueueScripts']);
 	}
- 
+
 
 	public function enqueueScripts()
 	{
-		
-		
 		if (isset($_GET['action']) && $_GET['action'] == 'elementor') {
 			wp_enqueue_script(
 				'handle-elementor',
@@ -26,7 +24,7 @@ class InstaFeedhubElementorHandler
 				IFH_VERSION,
 				true
 			);
- 
+
 			// === EDEN TUAN JS === //
 			wp_enqueue_script(
 				'instafeedhubElementor-fokedJs',
