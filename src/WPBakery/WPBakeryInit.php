@@ -42,7 +42,7 @@ class WPBakeryInit
 			'params' => [
 				[
 					'type'       => 'textfield',
-					'heading'    => __('Select InstaFeedHub', 'instafeedhub-wp'),
+					'heading'    => __('Instagram ID', 'instafeedhub-wp'),
 					'param_name' => 'vc-instagram-feedhub-input',
 				],
 			],
