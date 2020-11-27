@@ -11,6 +11,7 @@ class InstaFeedhubElementorHandler
 	public function __construct()
 	{
 		add_action('elementor/editor/after_enqueue_scripts', [$this, 'enqueueScripts']);
+		add_action('elementor/editor/after_save', [$this, 'saveInstaIds'], 10);
 	}
 
 
@@ -40,6 +41,25 @@ class InstaFeedhubElementorHandler
 				IFH_VERSION,
 				'all'
 			);
+		}
+	}
+
+	/**
+	 * @param $postId
+	 * @return bool
+	 */
+	public function saveInstaIds($postId)
+	{
+		if (!current_user_can('edit_posts')) {
+			return false;
+		}
+
+		$content = get_post_field('post_content', $postId);
+
+		if (preg_match_all('/InstagramID:([\d]+)/', $content, $aMatches)) {
+			if (isset($aMatches[1])) {
+				update_post_meta($postId, 'instafeedhub_ids', $aMatches[1]);
+			}
 		}
 	}
 }
