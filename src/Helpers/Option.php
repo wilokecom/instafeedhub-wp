@@ -87,7 +87,7 @@ class Option
 		foreach ($aInstaIds as $instaId) {
 			if (isset($aData[$instaId])) {
 				foreach ($aData[$instaId] as $key => $val) {
-					$aInstaSettings[$postId][$key] = InstaSettingValueFormat::correctValueType($val, $key);
+					$aInstaSettings[$instaId][$key] = InstaSettingValueFormat::correctValueType($val, $key);
 				}
 			}
 		}
