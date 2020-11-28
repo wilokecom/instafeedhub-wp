@@ -8,7 +8,7 @@ namespace InstafeedHub\Helpers;
  */
 class Widget
 {
-	private static $baseID = 'instagram-feedhub';
+	private static $baseID = 'instafeed';
 
 	/**
 	 * @return array
