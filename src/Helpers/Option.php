@@ -113,6 +113,7 @@ class Option
 				$instaID = intval($aInstaWidget[$index]['instaId']);
 			}
 		}
+
 		$aData = self::getInstaSettings();
 		$aInstaSettings = [];
 		if (isset($aData[$instaID])) {

@@ -13,23 +13,24 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 
-if ( ! defined( 'IFH_URL' ) ) {
-	define( 'IFH_URL', 'https://instafeedhub.com/' );
-	define( 'IFH_NAMESPACE', 'wiloke/v1/instafeedhub' );
-	define( 'IFH_VERSION', 0.1 );
-	define( 'IFH_PREFIX', 'instafeedhub_' );
-	define( 'IFH_ASSETS', plugin_dir_url( __FILE__) . 'assets/' );
+if (!defined('IFH_URL')) {
+	define('IFH_URL', 'https://instafeedhub.com/');
+	define('IFH_NAMESPACE', 'wiloke/v1/instafeedhub');
+	define('IFH_VERSION', 0.1);
+	define('IFH_PREFIX', 'instafeedhub_');
+	define('IFH_DIR', plugin_dir_path(__FILE__));
+	define('IFH_ASSETS', plugin_dir_url(__FILE__) . 'assets/');
 }
 
-require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
+require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 /**
  * Block Initializer.
  */
-require_once plugin_dir_path( __FILE__ ) . 'src/init.php';
+require_once plugin_dir_path(__FILE__) . 'src/init.php';
 
 use InstafeedHub\Controllers\AdminController;
 use InstafeedHub\Controllers\EnqueueScriptController;
@@ -38,6 +39,7 @@ use InstafeedHub\Controllers\RemoteDataController;
 use InstafeedHub\Widget\WidgetInit;
 use InstafeedHub\Elementor\ElementorInit;
 use InstafeedHub\Elementor\InstaFeedhubElementorHandler;
+use InstafeedHub\WPBakery\WPBakeryInit;
 
 new RemoteDataController();
 new ListenToTokenController();
@@ -47,4 +49,4 @@ new WidgetInit();
 new ElementorInit();
 new InstaFeedhubElementorHandler();
 
-
+new WPBakeryInit();
