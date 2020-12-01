@@ -59,6 +59,12 @@ class KCInit
 							]
 						]
 					],
+					'assets' => array(
+						'scripts' => array(
+							'handle-kc' => IFH_ASSETS . 'js/handle-kc.js',
+						),
+					),
+					'admin_view'=>''
 				]
 			]
 		];
