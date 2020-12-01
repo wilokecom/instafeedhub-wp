@@ -1,8 +1,8 @@
 <?php
+
 namespace InstafeedHub\Controllers;
 
 use InstafeedHub\Helpers\Option;
-use InstafeedHub\Helpers\Widget;
 
 /**
  * Class EnqueueScriptController
@@ -29,13 +29,9 @@ class EnqueueScriptController
 			return false;
 		}
 
-		$aInstaSettings = Option::getInstaSettingsByPostId(get_the_ID());
-		$aWidgetIDs = Widget::getWidgetIDsByBaseID();
-		foreach ($aWidgetIDs as $key => $widgetID) {
-			if(!empty(Option::getInstaSettingsByWidgetId($widgetID))){
-				$aInstaSettings[] = Option::getInstaSettingsByWidgetId($widgetID);
-			}
-		}
+		$aInstaSettings = apply_filters('instafeedhub/filter/src/EnqueceScriptController/enqueueScripts',
+			Option::getInstaSettingsByPostId(get_the_ID()));
+
 		if (empty($aInstaSettings)) {
 			return false;
 		}

@@ -3,6 +3,7 @@
 namespace InstafeedHub\Widget;
 
 use InstafeedHub\Helpers\Widget;
+use InstafeedHub\Helpers\Option;
 
 /**
  * Class WidgetInit
@@ -15,6 +16,7 @@ class WidgetInit
 		add_action('wp_ajax_save_instagram_widget', [$this, 'saveInstagramWidget']);
 		add_action('widgets_init', [$this, 'register']);
 		add_action('admin_enqueue_scripts', [$this, 'handleWidget']);
+		add_filter('instafeedhub/filter/src/EnqueceScriptController/enqueueScripts', [$this, 'addWidgetToScript']);
 	}
 
 	public function register()
@@ -73,7 +75,11 @@ class WidgetInit
 					$instaID = intval($aInstaWidget[$index]['instaId']);
 				}
 			}
-			$instaTitle = ($aInstaWidget[$index]['instaTitle'] == null) ? '' : $aInstaWidget[$index]['instaTitle'];
+			if (isset($aInstaWidget[$index])) {
+				$instaTitle = ($aInstaWidget[$index]['instaTitle'] == null) ? '' : $aInstaWidget[$index]['instaTitle'];
+			} else {
+				$instaTitle = '';
+			}
 			$aElements[$widgetID] = [
 				'widgetID'       => $widgetID,
 				'buttonID'       => 'widget-' . $widgetID . '-button',
@@ -105,5 +111,21 @@ class WidgetInit
 		];
 
 		update_option('widget-insta-feedhub', $aInstaWidget);
+	}
+
+	/**
+	 * @param $aInstaSettings
+	 * @return array
+	 */
+	public function addWidgetToScript($aInstaSettings)
+	{
+		$aWidgetIDs = Widget::getWidgetIDsByBaseID();
+		foreach ($aWidgetIDs as $key => $widgetID) {
+			if (!empty(Option::getInstaSettingsByWidgetId($widgetID))) {
+				$aInstaSettings[] = Option::getInstaSettingsByWidgetId($widgetID);
+			}
+		}
+
+		return $aInstaSettings;
 	}
 }

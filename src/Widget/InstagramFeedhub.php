@@ -20,7 +20,7 @@ class InstagramFeedhub extends RootWidget
 	protected $aFields
 		= [
 			'button' => [
-				'name'        => 'Instagram Feed',
+				'name'        => 'InstafeedHub',
 				'description' => 'Click here to select the instagram',
 				'type'        => 'button'
 			],
@@ -33,7 +33,7 @@ class InstagramFeedhub extends RootWidget
 	{
 		parent::__construct(
 			$this->baseID,
-			esc_html__('Instagram Feed', 'instafeedhub-wp')
+			esc_html__('InstafeedHub', 'instafeedhub-wp')
 		);
 	}
 

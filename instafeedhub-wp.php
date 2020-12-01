@@ -48,5 +48,4 @@ new AdminController();
 new WidgetInit();
 new ElementorInit();
 new InstaFeedhubElementorHandler();
-
 new WPBakeryInit();
