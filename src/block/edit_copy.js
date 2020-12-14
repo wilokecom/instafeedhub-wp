@@ -66,7 +66,7 @@ export default function Edit ({ setAttributes, isSelected, attributes }) {
 
 
     const actionAxiosFindUser = (query) => {
-      const url = `https://instafeedhub.com/wp-json/wiloke/v1/instagram/me/find-insta-user?q=${query}`;
+      const url = `https://shopifyinstagram.io:7890/wp-json/wiloke/v1/instagram/me/find-insta-user?q=${query}`;
       if (cancel) {
         cancel();
       }
@@ -102,7 +102,7 @@ export default function Edit ({ setAttributes, isSelected, attributes }) {
     }
 
     function downloadInstaConfigured({ id }) {
-      const url = `https://instafeedhub.com/wp-json/wiloke/v1/instagram/me/${id}/global-configuration`;
+      const url = `https://shopifyinstagram.io:7890/wp-json/wiloke/v1/instagram/me/${id}/global-configuration`;
       axios
         .get(url, {
           responseType: "json",

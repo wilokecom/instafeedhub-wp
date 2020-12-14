@@ -24,7 +24,7 @@ class InstagramFeedhub extends Widget_Base
 	 */
 	public function get_title()
 	{
-		return esc_html__('Instagram FeedHub', 'instafeedhub-wp');
+		return esc_html__('InstafeedHub', 'instafeedhub-wp');
 	}
 
 	/**
