@@ -36,7 +36,7 @@ class WPBakeryInit
 			return $this->aConfiguration;
 		}
 		$this->aConfiguration[] = [
-			'name'   => esc_html__('InstaFeedhub', 'instafeedhub-wp'),
+			'name'   => esc_html__('InstafeedHub', 'instafeedhub-wp'),
 			'base'   => $this->shortCode,
 			'icon'   => '',
 			'params' => [
