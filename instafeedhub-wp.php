@@ -6,10 +6,7 @@
  * Author: instafeedhub
  * Author URI: https://instafeedhub.com/
  * Version: 1.0.0
- * License: GPL2+
- * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  * Language: instafeedhub-wp
- * @package CGB
  */
 
 // Exit if accessed directly.
@@ -20,7 +17,7 @@ if (!defined('ABSPATH')) {
 if (!defined('IFH_URL')) {
 	define('IFH_URL', 'https://instafeedhub.com/');
 	define('IFH_NAMESPACE', 'wiloke/v1/instafeedhub');
-	define('IFH_VERSION', 0.1);
+	define('IFH_VERSION', 1.0);
 	define('IFH_PREFIX', 'instafeedhub_');
 	define('IFH_DIR', plugin_dir_path(__FILE__));
 	define('IFH_ASSETS', plugin_dir_url(__FILE__) . 'assets/');
