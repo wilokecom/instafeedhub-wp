@@ -1,6 +1,7 @@
 <?php
 
 namespace InstafeedHub\Elementor;
+use InstafeedHub\Helpers\Option;
 
 /**
  * Class InstaFeedhubElementorHandler
@@ -12,6 +13,7 @@ class InstaFeedhubElementorHandler
 	{
 		add_action('elementor/editor/after_enqueue_scripts', [$this, 'enqueueScripts']);
 		add_action('elementor/editor/after_save', [$this, 'saveInstaIds'], 10);
+		add_action('elementor/editor/before_enqueue_scripts', [$this, 'adminScripts']);
 	}
 
 
@@ -62,4 +64,36 @@ class InstaFeedhubElementorHandler
 			}
 		}
 	}
+
+	/**
+	 * @return bool
+	 */
+	public function adminScripts()
+	{
+		if (!current_user_can('edit_posts')) {
+			return false;
+		}
+
+		if (!isset($_GET['post']) && !isset($_GET['action ']) && $_GET['action '] !== 'elementor') {
+			return false;
+		}
+
+		$aTokens = Option::getTokens();
+
+		$aData = [
+			'accessToken'    => $aTokens['accessToken'],
+			'email'          => get_option('admin_email'),
+			'variation'      => 'instafeedhub',
+			'nickname'       => User::getUserNickname(),
+			'whitelistedUrl' => home_url('/'),
+			'createdAt'      => time(),
+			'version'        => IFH_VERSION
+		];
+		if (isset($_GET['post'])) {
+			$aData['id'] = abs($_GET['post']);
+		}
+
+		wp_localize_script('jquery', 'InstafeedHubTokens', $aData);
+	}
+
 }
