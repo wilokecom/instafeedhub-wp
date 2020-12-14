@@ -5,7 +5,6 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
     //Add
     if (param.get('add_new') === 'multi') {
       const newId = param.get('widget-id');
-      console.log(111, '__add widgetId:', { id: param.get('widget-id') });
       window.instafeedHubElements = {
         ...window.instafeedHubElements,
         [newId]: {
@@ -31,7 +30,6 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
     //Delete
     if (!!param.get('delete_widget')) {
       //Something here
-      console.log(222, '__delete widgetId:', { id: param.get('widget-id') });
       const idDeleted = param.get('widget-id');
 
       const newKeys = Object.keys(window.instafeedHubElements).filter(item => item !== idDeleted);

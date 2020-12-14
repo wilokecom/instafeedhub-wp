@@ -53,7 +53,6 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
   //         data = vals[0].data.data;
   //         //Add
   //         if (data.widgetType === 'instafeedhub') {
-  //           console.log('aaaaa');
   //           init();
   //         }
   //       }
@@ -63,7 +62,6 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
 
 function init(instaID) {
   const input = document.querySelector('input[data-setting="instafeedhub_input"]');
-  console.log(123, { instaID });
   if (!input) return;
   input.setAttribute('disabled', true);
   window.InstafeedHubTokens = { ...InstafeedHubTokens, args: { id: instaID } };
