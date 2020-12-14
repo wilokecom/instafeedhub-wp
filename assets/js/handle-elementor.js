@@ -1,3 +1,4 @@
+'use strict';
 //   === simulateEvent for ELEMENTOR === //
 let _timeOut = null;
 

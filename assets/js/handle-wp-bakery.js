@@ -1,3 +1,4 @@
+'use strict';
 jQuery(document).ajaxComplete(function (event, xhr, settings) {
   let data = settings.data;
   let param = new URLSearchParams(data);

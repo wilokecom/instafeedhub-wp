@@ -1,3 +1,4 @@
+'use strict';
 jQuery(document).ajaxComplete(function (event, xhr, settings) {
   let data = settings.data;
   let param = new URLSearchParams(data);
@@ -29,7 +30,6 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
 
     //Delete
     if (!!param.get('delete_widget')) {
-      //Something here
       const idDeleted = param.get('widget-id');
 
       const newKeys = Object.keys(window.instafeedHubElements).filter(item => item !== idDeleted);
@@ -57,17 +57,3 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
     }
   }
 });
-
-// (function( $ ) {
-//   var ajaxscript = { ajax_url : 'https://demo.wilcityapp.com/wp-admin/admin-ajax.php' }
-//   $.ajax({
-//     url : ajaxscript.ajax_url,
-//     data : {
-//       action : 'save_instagram_widget',
-//       id : 1
-//     },
-//     method : 'POST',
-//     success : function( response ){ console.log(response) },
-//     error : function(error){ console.log(error) }
-//   })
-// })(jQuery)
