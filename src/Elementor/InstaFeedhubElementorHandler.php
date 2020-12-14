@@ -2,6 +2,7 @@
 
 namespace InstafeedHub\Elementor;
 use InstafeedHub\Helpers\Option;
+use InstafeedHub\Helpers\User;
 
 /**
  * Class InstaFeedhubElementorHandler
