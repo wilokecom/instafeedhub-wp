@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: InstafeedHub\n"
+"Project-Id-Version: InstafeedHub WP\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-09 17:09+0000\n"
+"POT-Creation-Date: 2020-12-14 10:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -15,12 +15,22 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.4.4; wp-5.5.3"
 
+#: src/Elementor/InstagramFeedhub.php:54
+msgid "Content"
+msgstr ""
+
 #. URI of the plugin
 #. Author URI of the plugin
 msgid "https://instafeedhub.com/"
 msgstr ""
 
-#. Name of the plugin
+#: src/Elementor/ElementorInit.php:62
+msgid "InstaFeedHub"
+msgstr ""
+
+#: src/Widget/InstagramFeedhub.php:36 src/Elementor/InstagramFeedhub.php:27
+#: src/WPBakery/WPBakeryInit.php:39 src/Controllers/AdminController.php:22
+#: src/Controllers/AdminController.php:23
 msgid "InstafeedHub"
 msgstr ""
 
@@ -28,6 +38,44 @@ msgstr ""
 msgid "instafeedhub"
 msgstr ""
 
+#. Name of the plugin
+msgid "InstafeedHub WP"
+msgstr ""
+
+#: src/Elementor/InstagramFeedhub.php:62 src/WPBakery/WPBakeryInit.php:45
+msgid "Instagram ID"
+msgstr ""
+
+#: src/Controllers/ListenToTokenController.php:43
+msgid "Server Error"
+msgstr ""
+
+#: src/Controllers/RemoteDataController.php:53
+#: src/Controllers/RemoteDataController.php:100
+msgid "The access token is invalid"
+msgstr ""
+
 #. Description of the plugin
 msgid "The easiest way to integrate Instagram to your website"
+msgstr ""
+
+#: src/Controllers/RemoteDataController.php:106
+msgid "The post id is required"
+msgstr ""
+
+#: src/Controllers/ListenToTokenController.php:29
+msgid "The refresh token is emptied"
+msgstr ""
+
+#: src/Controllers/RemoteDataController.php:58
+msgid "There is no data"
+msgstr ""
+
+#: src/Controllers/RemoteDataController.php:111
+#: src/Controllers/RemoteDataController.php:118
+msgid "This post has been deleted or it does not exist"
+msgstr ""
+
+#: src/Controllers/RemoteDataController.php:82
+msgid "This post status is not publish"
 msgstr ""
