@@ -5,7 +5,7 @@
  * Description: The easiest way to integrate Instagram to your website
  * Author: instafeedhub
  * Author URI: https://instafeedhub.com/
- * Version: 1.0.0
+ * Version: 1.0.1
  * Language: instafeedhub-wp
  */
 

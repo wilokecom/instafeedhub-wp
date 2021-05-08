@@ -38,14 +38,14 @@ class EnqueueScriptController
 
 		wp_enqueue_style(
 			'instafeedhub',
-			'https://insta-layout.netlify.app/styles.css',
+			'https://instafeedhub-layout.netlify.app/styles.css',
 			[],
 			IFH_VERSION
 		);
 
 		wp_enqueue_script(
 			'instafeedhub',
-			'https://insta-layout.netlify.app/main.js',
+			'https://instafeedhub-layout.netlify.app/main.js',
 			['jquery'],
 			IFH_VERSION,
 			true
