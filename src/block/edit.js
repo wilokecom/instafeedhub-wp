@@ -126,7 +126,7 @@ export default function Edit( { setAttributes, isSelected, attributes, clientId 
 		if ( !! verifyError ) {
 			return renderError();
 		}
-		window.open( INSTA_IFRAME_URL );
+		window.open( `${INSTA_IFRAME_URL}?accessToken=${InstafeedHubTokens.accessToken}&action=login` );
 		return <span>{ postId }</span>;
 	};
 
