@@ -29,8 +29,10 @@ class EnqueueScriptController
 			return false;
 		}
 
-		$aInstaSettings = apply_filters('instafeedhub/filter/src/EnqueceScriptController/enqueueScripts',
-			Option::getInstaSettingsByPostId(get_the_ID()));
+		$aInstaSettings = apply_filters(
+			'instafeedhub/filter/src/EnqueceScriptController/enqueueScripts',
+			Option::getInstaSettingsByPostId(get_the_ID())
+		);
 
 		if (empty($aInstaSettings)) {
 			return false;
